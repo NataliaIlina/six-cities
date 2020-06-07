@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { fetchOffers, setActiveOffer, offersSelector } from 'src/ducks/hotels/hotels';
 import { Layout, CitiesList, OffersList, SortingSelect, Map } from 'src/containers';
-import { useDispatch } from 'src/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'src/store';
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,8 +27,8 @@ const MainPage: React.FC = () => {
                   <b className='places__found'>
                     {offers.length} places to stay in {currentCity.name}
                   </b>
-                  {/*         <SortingSelect />
-                  <OffersList />*/}
+                  <SortingSelect />
+                  <OffersList offers={offers} />
                 </section>
 
                 <div className='cities__right-section'>

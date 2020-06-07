@@ -1,30 +1,26 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { SORTING_OPTIONS, SORTING_TITLE } from "src/constants";
-import { getSorting } from "reducer/data/selectors";
-import { changeSorting } from "src/actions";
-import { TRootState } from "src/reducer";
-import { ComponentProps, SortingSelectProps } from "./types";
+import React, { useState } from 'react';
+import { SORTING_OPTIONS, SORTING_TITLE } from 'src/constants';
+import { useDispatch, useSelector } from 'src/store';
+import { changeSortingValue } from 'src/ducks/hotels/hotels';
 
-const SortingSelect: React.FC<SortingSelectProps> = ({
-  changeSorting,
-  sorting
-}) => {
-  const [isSelectOpen, openSelect] = useState<boolean>(false);
+const SortingSelect: React.FC = () => {
+  const [isSelectOpen, openSelect] = useState(false);
+  const dispatch = useDispatch();
+  const sortingValue = useSelector((state) => state.hotels.sortingValue);
 
   return (
-    <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
+    <form className='places__sorting' action='#' method='get'>
+      <span className='places__sorting-caption'>Sort by</span>
       <span
-        className="places__sorting-type"
+        className='places__sorting-type'
         tabIndex={0}
         onClick={() => {
           openSelect(!isSelectOpen);
         }}
       >
-        {SORTING_TITLE[sorting]}
-        <svg className="places__sorting-arrow" width="7" height="4">
-          <use xlinkHref="#icon-arrow-select" />
+        {SORTING_TITLE[sortingValue]}
+        <svg className='places__sorting-arrow' width='7' height='4'>
+          <use xlinkHref='#icon-arrow-select' />
         </svg>
       </span>
       <ul
@@ -35,12 +31,10 @@ const SortingSelect: React.FC<SortingSelectProps> = ({
         {SORTING_OPTIONS.map((option: string) => (
           <li
             key={option}
-            className={`places__option ${
-              option === sorting ? `places__option--active` : ``
-            }`}
+            className={`places__option ${option === sortingValue ? `places__option--active` : ``}`}
             tabIndex={0}
             onClick={() => {
-              changeSorting(option);
+              dispatch(changeSortingValue(option));
               openSelect(!isSelectOpen);
             }}
           >
@@ -52,13 +46,4 @@ const SortingSelect: React.FC<SortingSelectProps> = ({
   );
 };
 
-const mapStateToProps = (state: TRootState, ownProps: ComponentProps) =>
-  Object.assign({}, ownProps, {
-    sorting: getSorting(state)
-  });
-
-const mapDispatchToProps = { changeSorting };
-
-export { SortingSelect };
-
-export default connect(mapStateToProps, mapDispatchToProps)(SortingSelect);
+export default SortingSelect;

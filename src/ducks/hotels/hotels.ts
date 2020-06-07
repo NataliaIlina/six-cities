@@ -35,7 +35,7 @@ const hotelsSlice = createSlice({
     setActiveOffer: (draftState, action: PayloadAction<TOffer | null>) => {
       draftState.activeOffer = action.payload;
     },
-    changeSorting: (draftState, action: PayloadAction<string>) => {
+    changeSortingValue: (draftState, action: PayloadAction<string>) => {
       draftState.sortingValue = action.payload;
     },
   },
@@ -59,7 +59,7 @@ const hotelsSlice = createSlice({
 export const {
   changeCurrentCity,
   setActiveOffer,
-  changeSorting,
+  changeSortingValue,
   replaceOffer,
 } = hotelsSlice.actions;
 

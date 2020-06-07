@@ -1,9 +1,9 @@
 import React from 'react';
 import { Header, SvgSprite } from 'src/components';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'src/store';
 
 const Layout: React.FC<{ type?: 'login' | 'main' }> = ({ children, type }) => {
-  const userData = useSelector((state) => state.user.data);
+  const userData = useSelector((state) => state.auth.user.data);
 
   return (
     <div
