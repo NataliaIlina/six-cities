@@ -1,22 +1,27 @@
 import React, { useEffect } from 'react';
-import { fetchOffers, setActiveOffer, offersSelector } from 'src/ducks/hotels/hotels';
+import { fetchOffers, offersSelector } from 'src/ducks/hotels/hotels';
 import { Layout, CitiesList, OffersList, SortingSelect, Map } from 'src/containers';
 import { useDispatch, useSelector } from 'src/store';
+import { EStatus } from 'src/models/common';
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
   const offers = useSelector(offersSelector);
+  const status = useSelector((state) => state.hotels.status);
   const currentCity = useSelector((state) => state.hotels.currentCity);
 
   useEffect(() => {
-    dispatch(fetchOffers());
-    dispatch(setActiveOffer(null));
+    if (status == EStatus.IDLE) {
+      dispatch(fetchOffers());
+    }
   }, []);
 
   return (
     <Layout type='main'>
       <main className='page__main page__main--index'>
-        {offers.length ? (
+        {status === EStatus.ERROR && <p>Произошла ошибка при загрузке данных</p>}
+        {status === EStatus.LOADING && <p style={{ textAlign: `center` }}>Loading...</p>}
+        {status === EStatus.SUCCESS && (
           <>
             <h1 className='visually-hidden'>Cities</h1>
             <CitiesList />
@@ -39,10 +44,6 @@ const MainPage: React.FC = () => {
               </div>
             </div>
           </>
-        ) : (
-          <div>
-            <p style={{ textAlign: `center` }}>Loading...</p>
-          </div>
         )}
       </main>
     </Layout>

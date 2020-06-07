@@ -1,16 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getComments } from 'src/api/hotels';
+import { getComments, postComment } from 'src/api/hotels';
 import { EStatus } from 'src/constants';
 import type { TComment, TCommentsStore } from './commentsModels';
 
 const initialState: TCommentsStore = {
-  data: null,
+  list: null,
   status: EStatus.IDLE,
 };
 
-export const fetchComments = createAsyncThunk<TComment, number>('comments/get', (hotelId) =>
+export const fetchComments = createAsyncThunk<TComment[], number>('comments/get', (hotelId) =>
   getComments(hotelId)
 );
+
+export const addComment = createAsyncThunk<
+  TComment[],
+  { hotelId: number; rating: number; comment: string }
+>('comments/post', ({ hotelId, rating, comment }) => postComment(hotelId, rating, comment));
 
 const commentsSlice = createSlice({
   name: 'comments',
@@ -18,9 +23,20 @@ const commentsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchComments.pending, (draftState) => {})
-      .addCase(fetchComments.fulfilled, (draftState) => {})
-      .addCase(fetchComments.rejected, (draftState) => {});
+      .addCase(fetchComments.pending, (draftState) => {
+        draftState.status = EStatus.LOADING;
+      })
+      .addCase(fetchComments.fulfilled, (draftState, action) => {
+        draftState.status = EStatus.SUCCESS;
+        draftState.list = action.payload;
+      })
+      .addCase(fetchComments.rejected, (draftState) => {
+        draftState.status = EStatus.ERROR;
+      });
+
+    builder.addCase(addComment.fulfilled, (draftState, action) => {
+      draftState.list = action.payload;
+    });
   },
 });
 

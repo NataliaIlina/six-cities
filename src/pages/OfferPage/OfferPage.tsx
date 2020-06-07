@@ -1,31 +1,41 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { getComments, getCurrentCity, getCurrentOffer } from 'reducer/data/selectors';
-import { getUserAuth } from 'reducer/user/selectors';
+import React, { useCallback, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Reviews, ReviewForm, PlaceCard } from 'src/components';
-import { addComment, fetchComments, toggleFavoriteStatus, setActiveOffer } from 'src/actions';
-import { Layout, Map } from 'src/containers';
-import { RouteComponentProps } from 'react-router-dom';
-import { BASE_URL } from 'src/constants';
-import { TRootState } from 'src/reducer';
-import { ComponentProps, OfferPageProps } from './types';
 
-const OfferPage: React.FC<OfferPageProps & RouteComponentProps<{ id?: string }>> = ({
-  fetchComments,
-  offer,
-  comments,
-  addComment,
-  offers,
-  currentOfferId,
-  isUserAuth,
-  toggleFavoriteStatus,
-  setActiveOffer,
-  match,
-}) => {
+import { Layout, Map } from 'src/containers';
+import { BASE_URL } from 'src/constants';
+import { useDispatch, useSelector } from 'src/store';
+
+import { fetchComments, addComment } from 'src/ducks/comments/comments';
+import { setActiveOffer, nearbyOffers } from 'src/ducks/hotels/hotels';
+import { toggleFavoriteStatus } from 'src/ducks/favorite/favorite';
+import { useParams } from 'react-router-dom';
+import { EStatus } from 'src/models/common';
+
+const OfferPage: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const comments = useSelector((state) => state.comments);
+  const offers = useSelector(nearbyOffers);
+  const isUserAuth = useSelector((state) => state.auth.isUserAuth);
+  const offer = useSelector((state) => state.hotels.activeOffer);
+
+  const { id } = useParams();
+
   useEffect(() => {
-    fetchComments(parseInt(match.params.id, 10));
-    setActiveOffer(parseInt(match.params.id, 10));
+    dispatch(fetchComments(parseInt(id, 10)));
+  }, []);
+
+  const addCommentHandler = useCallback((hotelId, rating, comment) => {
+    dispatch(addComment({ hotelId, rating, comment }));
+  }, []);
+
+  const setActiveOfferHandler = useCallback((offer) => {
+    dispatch(setActiveOffer(offer));
+  }, []);
+
+  const toggleFavoriteStatusHandler = useCallback((hotelId: number, status: 1 | 0) => {
+    dispatch(toggleFavoriteStatus({ hotelId, status }));
   }, []);
 
   return offer ? (
@@ -59,7 +69,7 @@ const OfferPage: React.FC<OfferPageProps & RouteComponentProps<{ id?: string }>>
                     }`}
                     type='button'
                     onClick={() => {
-                      toggleFavoriteStatus(offer.id, offer.isFavorite ? 0 : 1);
+                      toggleFavoriteStatusHandler(offer.id, offer.isFavorite ? 0 : 1);
                     }}
                   >
                     <svg className='property__bookmark-icon' width='31' height='33'>
@@ -123,8 +133,10 @@ const OfferPage: React.FC<OfferPageProps & RouteComponentProps<{ id?: string }>>
                 </div>
               </div>
               <section className='property__reviews reviews'>
-                <Reviews comments={comments} />
-                {isUserAuth ? <ReviewForm addComment={addComment} hotelId={offer.id} /> : null}
+                {comments.status === EStatus.SUCCESS && <Reviews comments={comments.list} />}
+                {isUserAuth ? (
+                  <ReviewForm addComment={addCommentHandler} hotelId={offer.id} />
+                ) : null}
               </section>
             </div>
           </div>
@@ -137,17 +149,19 @@ const OfferPage: React.FC<OfferPageProps & RouteComponentProps<{ id?: string }>>
           <section className='near-places places'>
             <h2 className='near-places__title'>Other places in the neighbourhood</h2>
             <div className='near-places__list places__list'>
-              {offers
-                .filter((item) => item.id !== currentOfferId)
-                .map((offer) => (
-                  <PlaceCard
-                    key={offer.id}
-                    offer={offer}
-                    toggleFavoriteStatus={toggleFavoriteStatus}
-                    isUserAuth={isUserAuth}
-                    setActiveOffer={setActiveOffer}
-                  />
-                ))}
+              {offers?.length
+                ? offers
+                    .filter((item) => item.id !== parseInt(id, 10))
+                    .map((offer) => (
+                      <PlaceCard
+                        key={offer.id}
+                        offer={offer}
+                        toggleFavoriteStatus={toggleFavoriteStatusHandler}
+                        isUserAuth={isUserAuth}
+                        setActiveOffer={setActiveOfferHandler}
+                      />
+                    ))
+                : null}
             </div>
           </section>
         </div>
@@ -158,23 +172,4 @@ const OfferPage: React.FC<OfferPageProps & RouteComponentProps<{ id?: string }>>
   );
 };
 
-export { OfferPage };
-
-const mapStateToProps = (state: TRootState, ownProps: ComponentProps) =>
-  Object.assign({}, ownProps, {
-    offer: null,
-    comments: getComments(state),
-    offers: null,
-    currentCity: getCurrentCity(state),
-    currentOfferId: getCurrentOffer(state, ownProps),
-    isUserAuth: getUserAuth(state),
-  });
-
-const mapDispatchToProps = {
-  fetchComments,
-  addComment,
-  toggleFavoriteStatus,
-  setActiveOffer,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(OfferPage);
+export default OfferPage;

@@ -93,4 +93,20 @@ export const offersSelector = createSelector(
       })
 );
 
+export const nearbyOffers = createSelector(
+  [
+    (state: TRootState) => state.hotels.offers,
+    (state: TRootState) => state.hotels.currentCity,
+    (state: TRootState) => state.hotels.activeOffer,
+  ],
+  (offers, city, activeOffer) => {
+    const currentOffer = offers.find((it) => it.id === activeOffer?.id);
+    const nearOffers = offers
+      .filter((it) => it.city.name === city.name && it.id !== activeOffer?.id)
+      .slice(0, 3);
+    nearOffers.push(currentOffer);
+    return nearOffers;
+  }
+);
+
 export default hotelsSlice.reducer;

@@ -1,5 +1,5 @@
-import type { TAsyncData } from 'src/models/common';
 import { IUser } from 'src/models/user';
+import { EStatus } from 'src/models/common';
 
 export type TComment = {
   id: number;
@@ -9,4 +9,4 @@ export type TComment = {
   date: Date;
 };
 
-export type TCommentsStore = TAsyncData<TComment>;
+export type TCommentsStore = { list: TComment[] | null; status: EStatus };

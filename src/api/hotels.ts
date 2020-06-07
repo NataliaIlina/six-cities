@@ -8,6 +8,11 @@ export const getFavorite = (): Promise<TOffer[]> => api.get('/favorite');
 export const toggleFavoriteStatus = (hotelId: number, status: 1 | 0): Promise<TOffer[]> =>
   api.post(`/favorite/${hotelId}/${status}`);
 
-export const getComments = (hotelId: number): Promise<TComment> => api.get(`/comments/${hotelId}`);
-export const postComment = (hotelId: number, rating: number, comment: string) =>
-  api.post(`/comments/${hotelId}`, { rating, comment });
+export const getComments = (hotelId: number): Promise<TComment[]> =>
+  api.get(`/comments/${hotelId}`);
+
+export const postComment = (
+  hotelId: number,
+  rating: number,
+  comment: string
+): Promise<TComment[]> => api.post(`/comments/${hotelId}`, { rating, comment });
