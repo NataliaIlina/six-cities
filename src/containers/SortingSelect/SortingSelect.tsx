@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { SORTING_OPTIONS, SORTING_TITLE } from "src/constants";
 import { getSorting } from "reducer/data/selectors";
 import { changeSorting } from "src/actions";
-import { RootStateType } from "src/reducer";
+import { TRootState } from "src/reducer";
 import { ComponentProps, SortingSelectProps } from "./types";
 
 const SortingSelect: React.FC<SortingSelectProps> = ({
@@ -52,7 +52,7 @@ const SortingSelect: React.FC<SortingSelectProps> = ({
   );
 };
 
-const mapStateToProps = (state: RootStateType, ownProps: ComponentProps) =>
+const mapStateToProps = (state: TRootState, ownProps: ComponentProps) =>
   Object.assign({}, ownProps, {
     sorting: getSorting(state)
   });

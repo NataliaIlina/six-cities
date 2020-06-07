@@ -1,38 +1,37 @@
-import { createSelector } from "reselect";
-import { RootStateType } from "src/reducer";
-import { IOffer, IComment, ICity } from "src/interfaces";
+import { createSelector } from 'reselect';
+import { TRootState } from 'src/reducer';
 
-export const getOffers = (state: RootStateType): IOffer[] => {
-  return state[`DATA`].offers;
+export const getOffers = (state: TRootState) => {
+  return state.hotels.offers;
 };
 
-export const getFavorite = (state: RootStateType): IOffer[] => {
-  return state[`DATA`].favorite;
+export const getFavorite = (state: TRootState) => {
+  return state.favorite.data;
 };
 
-export const getComments = (state: RootStateType): IComment[] => {
-  return state[`DATA`].comments;
+export const getComments = (state: TRootState) => {
+  return state.comments.data;
 };
 
-export const getCurrentCity = (state: RootStateType): ICity => {
-  return state[`DATA`].currentCity;
+export const getCurrentCity = (state: TRootState) => {
+  return state.hotels.currentCity;
 };
-export const getSorting = (state: RootStateType): string => {
-  return state[`DATA`].sorting;
-};
-
-export const getActiveOffer = (state: RootStateType): IOffer => {
-  return state[`DATA`].activeOffer;
+export const getSorting = (state: TRootState) => {
+  return state.hotels.sortingValue;
 };
 
-export const getCurrentOffer = (state: RootStateType, props: any): number => {
+export const getActiveOffer = (state: TRootState) => {
+  return state.hotels.activeOffer;
+};
+
+export const getCurrentOffer = (state: TRootState, props: any): number => {
   return parseInt(props.match.params.id, 10);
 };
 
-export const getCitiesList = createSelector(getOffers, offers => {
+export const getCitiesList = createSelector(getOffers, (offers) => {
   const cities = [];
-  offers.forEach((offer: IOffer) => {
-    if (!cities.some(city => city.name === offer.city.name)) {
+  offers.forEach((offer) => {
+    if (!cities.some((city) => city.name === offer.city.name)) {
       cities.push(offer.city);
     }
     return;
@@ -40,22 +39,18 @@ export const getCitiesList = createSelector(getOffers, offers => {
   return cities;
 });
 
-export const getOffersForCurrentCity = createSelector(
-  getOffers,
-  getCurrentCity,
-  (offers, city) => offers.filter((it: IOffer) => it.city.name === city.name)
-);
+/*export const getOffersForCurrentCity = createSelector(getOffers, getCurrentCity, (offers, city) =>
+  offers.filter((it) => it.city.name === city.name)
+);*/
 
-export const getOffersByCount = createSelector(
+/*export const getOffersByCount = createSelector(
   getOffers,
   getCurrentCity,
   getCurrentOffer,
   (offers, city, currentOfferId) => {
-    const currentOffer = offers.find((it: IOffer) => it.id === currentOfferId);
+    const currentOffer = offers.find((it) => it.id === currentOfferId);
     const nearOffers = offers
-      .filter(
-        (it: IOffer) => it.city.name === city.name && it.id !== currentOfferId
-      )
+      .filter((it) => it.city.name === city.name && it.id !== currentOfferId)
       .slice(0, 3);
     nearOffers.push(currentOffer);
     return nearOffers;
@@ -65,8 +60,7 @@ export const getOffersByCount = createSelector(
 export const getCurrentOfferById = createSelector(
   getOffers,
   getCurrentOffer,
-  (offers, currentOffer) =>
-    offers.find((offer: IOffer) => offer.id === currentOffer)
+  (offers, currentOffer) => offers.find((offer) => offer.id === currentOffer)
 );
 
 export const getOffersForCurrentSorting = createSelector(
@@ -75,8 +69,8 @@ export const getOffersForCurrentSorting = createSelector(
   getSorting,
   (offers, city, sorting) =>
     offers
-      .filter((it: IOffer) => it.city.name === city.name)
-      .sort((a: IOffer, b: IOffer) => {
+      .filter((it) => it.city.name === city.name)
+      .sort((a, b) => {
         let sort: number;
         switch (sorting) {
           case `popular`:
@@ -95,4 +89,4 @@ export const getOffersForCurrentSorting = createSelector(
         }
         return sort;
       })
-);
+);*/

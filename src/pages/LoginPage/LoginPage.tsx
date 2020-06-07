@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 import { getUserAuth } from "reducer/user/selectors";
 import { Link } from "components";
 import { BASE_URL } from "src/constants";
-import { RootStateType } from "src/reducer";
+import { TRootState } from "src/reducer";
 import { ComponentProps, LoginPageProps } from "./types";
 
 const LoginPage: React.FC<LoginPageProps> = ({ authorizeUser, isUserAuth }) => {
@@ -80,7 +80,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ authorizeUser, isUserAuth }) => {
   );
 };
 
-const mapStateToProps = (state: RootStateType, ownProps: ComponentProps) =>
+const mapStateToProps = (state: TRootState, ownProps: ComponentProps) =>
   Object.assign({}, ownProps, {
     isUserAuth: getUserAuth(state)
   });

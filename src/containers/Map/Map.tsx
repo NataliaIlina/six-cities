@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getCurrentCity, getActiveOffer } from "reducer/data/selectors";
 import { BASE_URL } from "src/constants";
 import { MapProps, ComponentProps } from "./types";
-import { RootStateType } from "src/reducer";
+import { TRootState } from "src/reducer";
 
 const Map: React.FC<MapProps> = ({ currentCity, offers, activeOffer }) => {
   const mapRef = useRef<HTMLDivElement>();
@@ -89,7 +89,7 @@ const Map: React.FC<MapProps> = ({ currentCity, offers, activeOffer }) => {
   return <div id="map" style={{ height: `100%` }} ref={mapRef} />;
 };
 
-const mapStateToProps = (state: RootStateType, ownProps: ComponentProps) =>
+const mapStateToProps = (state: TRootState, ownProps: ComponentProps) =>
   Object.assign({}, ownProps, {
     currentCity: getCurrentCity(state),
     activeOffer: getActiveOffer(state)

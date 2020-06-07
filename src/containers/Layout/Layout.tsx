@@ -1,25 +1,21 @@
-import React from "react";
-import { Header, SvgSprite } from "components";
-import { connect } from "react-redux";
-import { getUserData } from "reducer/user/selectors";
-import { LayoutProps, ComponentProps } from "./types";
-import { RootStateType } from "src/reducer";
+import React from 'react';
+import { Header, SvgSprite } from 'src/components';
+import { useSelector } from 'react-redux';
 
-const Layout: React.FC<LayoutProps> = ({ children, type, userData }) => (
-  <div
-    className={`page
+const Layout: React.FC<{ type?: 'login' | 'main' }> = ({ children, type }) => {
+  const userData = useSelector((state) => state.user.data);
+
+  return (
+    <div
+      className={`page
     ${type === `login` ? `page--login page--gray` : ``}
     ${type === `main` ? `page--main page--gray` : ``}`}
-  >
-    <SvgSprite />
-    <Header userData={userData} />
-    {children}
-  </div>
-);
+    >
+      <SvgSprite />
+      <Header userData={userData} />
+      {children}
+    </div>
+  );
+};
 
-const mapStateToProps = (state: RootStateType, ownProps: ComponentProps) =>
-  Object.assign({}, ownProps, {
-    userData: getUserData(state)
-  });
-
-export default connect(mapStateToProps)(Layout);
+export default Layout;
