@@ -1,5 +1,4 @@
-import type { EStatus } from 'src/constants';
-import { TAsyncData } from 'src/models/common';
+import type { EStatus, TAsyncData } from 'src/models/common';
 
 export type TLocation = {
   latitude: number;

@@ -31,10 +31,3 @@ export const SORTING_TITLE = {
   [SORTING_VALUE_PRICE_TO_LOW]: `Price: high to low`,
   [SORTING_VALUE_TOP_RATED]: `Top rated first`,
 };
-
-export enum EStatus {
-  IDLE = 'IDLE',
-  LOADING = 'LOADING',
-  SUCCESS = 'SUCCESS',
-  ERROR = 'ERROR',
-}

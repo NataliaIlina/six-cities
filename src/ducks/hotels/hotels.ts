@@ -5,7 +5,7 @@ import {
   getHotels,
   toggleFavoriteStatus as toggleFavoriteStatusRequest,
 } from 'src/api/hotels';
-import { EStatus } from 'src/constants';
+import { EStatus } from 'src/models/common';
 import { getCitiesFromOffers, transformOffersForFavorite } from 'src/helpers';
 import { TRootState } from 'src/store';
 
