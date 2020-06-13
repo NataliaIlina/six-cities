@@ -1,4 +1,11 @@
 import type { TAsyncData } from 'src/models/common';
-import type { IUser } from 'src/models/user';
 
-export type TAuthStore = { user: TAsyncData<IUser>; isUserAuth: boolean };
+export type TUser = {
+  id: number;
+  email: string;
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+};
+
+export type TAuthStore = { user: TAsyncData<TUser>; isUserAuth: boolean };

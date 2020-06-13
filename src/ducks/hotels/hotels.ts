@@ -1,8 +1,12 @@
 import type { TCity, TOffer, TOffersStore } from './hotelsModels';
 import { createAsyncThunk, createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit';
-import { getHotels } from 'src/api/hotels';
+import {
+  getFavorite,
+  getHotels,
+  toggleFavoriteStatus as toggleFavoriteStatusRequest,
+} from 'src/api/hotels';
 import { EStatus } from 'src/constants';
-import { getCitiesFromOffers } from 'src/helpers';
+import { getCitiesFromOffers, transformOffersForFavorite } from 'src/helpers';
 import { TRootState } from 'src/store';
 
 const initialState: TOffersStore = {
@@ -12,9 +16,20 @@ const initialState: TOffersStore = {
   sortingValue: `popular`,
   activeOffer: null,
   status: EStatus.IDLE,
+  favorite: {
+    data: null,
+    status: EStatus.IDLE,
+  },
 };
 
 export const fetchOffers = createAsyncThunk('offers/get', (args) => getHotels());
+export const fetchFavorite = createAsyncThunk<TOffer[]>('offers/getFavorite', (args) =>
+  getFavorite()
+);
+export const toggleFavoriteStatus = createAsyncThunk<TOffer, { hotelId: number; status: 1 | 0 }>(
+  'offers/toggleFavoriteStatus',
+  ({ hotelId, status }) => toggleFavoriteStatusRequest(hotelId, status)
+);
 
 const hotelsSlice = createSlice({
   name: 'offers',
@@ -23,14 +38,6 @@ const hotelsSlice = createSlice({
     changeCurrentCity: (draftState, action: PayloadAction<TCity>) => {
       draftState.currentCity = action.payload;
       draftState.activeOffer = null;
-    },
-    replaceOffer: (draftState, action: PayloadAction<TOffer>) => {
-      draftState.offers = draftState.offers.map((offer) => {
-        if (offer.id === action.payload.id) {
-          return action.payload;
-        }
-        return offer;
-      });
     },
     setActiveOffer: (draftState, action: PayloadAction<TOffer | null>) => {
       draftState.activeOffer = action.payload;
@@ -44,7 +51,7 @@ const hotelsSlice = createSlice({
       .addCase(fetchOffers.pending, (draftState) => {
         draftState.status = EStatus.LOADING;
       })
-      .addCase(fetchOffers.fulfilled, (draftState, action: PayloadAction<TOffer[]>) => {
+      .addCase(fetchOffers.fulfilled, (draftState, action) => {
         draftState.status = EStatus.SUCCESS;
         draftState.offers = action.payload;
         draftState.currentCity = action.payload[0].city;
@@ -53,15 +60,31 @@ const hotelsSlice = createSlice({
       .addCase(fetchOffers.rejected, (draftState) => {
         draftState.status = EStatus.ERROR;
       });
+
+    builder
+      .addCase(fetchFavorite.pending, (draftState) => {
+        draftState.favorite.status = EStatus.LOADING;
+      })
+      .addCase(fetchFavorite.fulfilled, (draftState, action) => {
+        draftState.favorite.status = EStatus.SUCCESS;
+        draftState.favorite.data = transformOffersForFavorite(action.payload);
+      })
+      .addCase(fetchFavorite.rejected, (draftState) => {
+        draftState.favorite.status = EStatus.ERROR;
+      });
+
+    builder.addCase(toggleFavoriteStatus.fulfilled, (draftState, action) => {
+      draftState.offers = draftState.offers.map((offer) => {
+        if (offer.id === action.payload.id) {
+          return action.payload;
+        }
+        return offer;
+      });
+    });
   },
 });
 
-export const {
-  changeCurrentCity,
-  setActiveOffer,
-  changeSortingValue,
-  replaceOffer,
-} = hotelsSlice.actions;
+export const { changeCurrentCity, setActiveOffer, changeSortingValue } = hotelsSlice.actions;
 
 export const offersSelector = createSelector(
   [

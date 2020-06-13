@@ -8,7 +8,6 @@ const middleware = getDefaultMiddleware({
   thunk: {
     extraArgument: api,
   },
-  serializableCheck: false,
 });
 
 const store = configureStore({

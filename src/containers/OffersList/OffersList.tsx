@@ -1,9 +1,7 @@
 import React, { useCallback } from 'react';
 import { PlaceCard } from 'src/components';
-import { IOffer } from 'src/interfaces';
 import { useDispatch, useSelector } from 'src/store';
-import { setActiveOffer } from 'src/ducks/hotels/hotels';
-import { toggleFavoriteStatus } from 'src/ducks/favorite/favorite';
+import { setActiveOffer, toggleFavoriteStatus } from 'src/ducks/hotels/hotels';
 import { TOffer } from 'src/ducks/hotels/hotelsModels';
 
 const OffersList: React.FC<{ offers: TOffer[] }> = ({ offers }) => {
@@ -20,7 +18,7 @@ const OffersList: React.FC<{ offers: TOffer[] }> = ({ offers }) => {
 
   return (
     <div className='cities__places-list places__list tabs__content'>
-      {offers.map((offer: IOffer) => (
+      {offers.map((offer) => (
         <PlaceCard
           offer={offer}
           key={offer.id}

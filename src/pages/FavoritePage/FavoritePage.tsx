@@ -1,41 +1,54 @@
 import React, { useEffect } from 'react';
-import { Footer, FavoriteCard, FavoritesEmpty } from 'components';
-import { Layout } from 'containers';
-import { IOffer } from 'src/interfaces';
-import { ComponentProps, FavoritePageProps } from './types';
+import { Footer, FavoriteCard, FavoritesEmpty } from 'src/components';
+import { Layout } from 'src/containers';
+import { useDispatch, useSelector } from 'src/store';
+import { fetchFavorite } from 'src/ducks/hotels/hotels';
+import { EStatus } from 'src/models/common';
 
-const FavoritePage: React.FC<FavoritePageProps> = ({ favorite, fetchFavorite }) => {
+const FavoritePage: React.FC = () => {
+  const dispatch = useDispatch();
+  const { status, data } = useSelector((state) => state.hotels.favorite);
+
   useEffect(() => {
-    fetchFavorite();
+    if (status === EStatus.IDLE) {
+      dispatch(fetchFavorite());
+    }
   }, []);
+
   return (
     <Layout>
       <main className='page__main page__main--favorites'>
         <div className='page__favorites-container container'>
-          {Object.keys(favorite).length ? (
-            <section className='favorites'>
-              <h1 className='favorites__title'>Saved listing</h1>
-              <ul className='favorites__list'>
-                {Object.keys(favorite).map((key, index) => (
-                  <li className='favorites__locations-items' key={`${key}_${index}`}>
-                    <div className='favorites__locations locations locations--current'>
-                      <div className='locations__item'>
-                        <a className='locations__item-link' href='#'>
-                          <span>{key}</span>
-                        </a>
-                      </div>
-                    </div>
-                    <div className='favorites__places'>
-                      {favorite[key].map((it: IOffer) => (
-                        <FavoriteCard offer={it} key={it.id} />
-                      ))}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ) : (
-            <FavoritesEmpty />
+          {status === EStatus.LOADING && <p>Loading...</p>}
+          {status === EStatus.ERROR && <p>Error...</p>}
+          {status === EStatus.SUCCESS && (
+            <>
+              {Object.keys(data).length ? (
+                <section className='favorites'>
+                  <h1 className='favorites__title'>Saved listing</h1>
+                  <ul className='favorites__list'>
+                    {Object.keys(data).map((key, index) => (
+                      <li className='favorites__locations-items' key={`${key}_${index}`}>
+                        <div className='favorites__locations locations locations--current'>
+                          <div className='locations__item'>
+                            <a className='locations__item-link' href='#'>
+                              <span>{key}</span>
+                            </a>
+                          </div>
+                        </div>
+                        <div className='favorites__places'>
+                          {data[key].map((it) => (
+                            <FavoriteCard offer={it} key={it.id} />
+                          ))}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : (
+                <FavoritesEmpty />
+              )}
+            </>
           )}
         </div>
       </main>
@@ -44,4 +57,4 @@ const FavoritePage: React.FC<FavoritePageProps> = ({ favorite, fetchFavorite }) 
   );
 };
 
-export default () => <div>123</div>;
+export default FavoritePage;

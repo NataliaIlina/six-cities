@@ -1,4 +1,4 @@
-import React, { useDebugValue, useState } from 'react';
+import React, { useState } from 'react';
 import { Layout } from 'src/containers';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'src/components';

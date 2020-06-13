@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getComments, postComment } from 'src/api/hotels';
+import { getComments, postComment } from 'src/api/comments';
 import { EStatus } from 'src/constants';
 import type { TComment, TCommentsStore } from './commentsModels';
 

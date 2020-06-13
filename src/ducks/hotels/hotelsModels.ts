@@ -1,4 +1,5 @@
 import type { EStatus } from 'src/constants';
+import { TAsyncData } from 'src/models/common';
 
 export type TLocation = {
   latitude: number;
@@ -42,4 +43,5 @@ export type TOffersStore = {
   sortingValue: string;
   activeOffer: TOffer | null;
   status: EStatus;
+  favorite: TAsyncData<{ [key: string]: TOffer[] }>;
 };

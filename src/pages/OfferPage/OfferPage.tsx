@@ -7,8 +7,7 @@ import { BASE_URL } from 'src/constants';
 import { useDispatch, useSelector } from 'src/store';
 
 import { fetchComments, addComment } from 'src/ducks/comments/comments';
-import { setActiveOffer, nearbyOffers } from 'src/ducks/hotels/hotels';
-import { toggleFavoriteStatus } from 'src/ducks/favorite/favorite';
+import { setActiveOffer, toggleFavoriteStatus, nearbyOffers } from 'src/ducks/hotels/hotels';
 import { useParams } from 'react-router-dom';
 import { EStatus } from 'src/models/common';
 

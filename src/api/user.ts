@@ -1,7 +1,7 @@
 import api from 'src/api';
-import { IUser } from 'src/models/user';
+import { TUser } from 'src/ducks/auth/authModels';
 
-export const getUser = (): Promise<IUser> => api.get('/login');
+export const getUser = (): Promise<TUser> => api.get('/login');
 
-export const postUser = (email: string, password: string): Promise<IUser> =>
+export const postUser = (email: string, password: string): Promise<TUser> =>
   api.post('/login', { email, password });
