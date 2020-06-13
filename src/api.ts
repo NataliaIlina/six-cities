@@ -9,8 +9,7 @@ const api = axios.create({
 });
 
 const onSuccess = (response) => transformKeysToCamel(response.data);
-const onFail = (err) => err;
 
-api.interceptors.response.use(onSuccess, onFail);
+api.interceptors.response.use(onSuccess);
 
 export default api;
