@@ -15,7 +15,7 @@ const FavoriteCard: React.FC<FavoriteCardProps> = ({ offer }) => (
           src={offer.previewImage}
           width="150"
           height="110"
-          alt="Place image"
+          alt="Place preview"
         />
       </Link>
     </div>

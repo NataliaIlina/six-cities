@@ -38,7 +38,7 @@ const PlaceCard: React.FC<TProps> = ({
             src={offer.previewImage}
             width="260"
             height="200"
-            alt="Place image"
+            alt="Place preview"
           />
         </a>
       </div>
