@@ -29,8 +29,8 @@ const OfferPage: React.FC = () => {
     dispatch(addComment({ hotelId, rating, comment }));
   }, []);
 
-  const setActiveOfferHandler = useCallback((offer) => {
-    dispatch(setActiveOffer(offer));
+  const setActiveOfferHandler = useCallback((o) => {
+    dispatch(setActiveOffer(o));
   }, []);
 
   const toggleFavoriteStatusHandler = useCallback((hotelId: number, status: 1 | 0) => {
@@ -43,11 +43,13 @@ const OfferPage: React.FC = () => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.images.map((img, index) => (index > 5 ? null : (
-                <div key={img} className="property__image-wrapper">
-                  <img className="property__image" src={img} alt="Photo studio" />
-                </div>
-              )))}
+              {offer.images.map((img, index) =>
+                index > 5 ? null : (
+                  <div key={img} className="property__image-wrapper">
+                    <img className="property__image" src={img} alt="Preview studio" />
+                  </div>
+                ),
+              )}
             </div>
           </div>
           <div className="property__container container">
@@ -158,10 +160,10 @@ const OfferPage: React.FC = () => {
               {offers?.length
                 ? offers
                   .filter((item) => item.id !== parseInt(id, 10))
-                  .map((offer) => (
+                  .map((o) => (
                     <PlaceCard
-                      key={offer.id}
-                      offer={offer}
+                      key={o.id}
+                      offer={o}
                       toggleFavoriteStatus={toggleFavoriteStatusHandler}
                       isUserAuth={isUserAuth}
                       setActiveOffer={setActiveOfferHandler}

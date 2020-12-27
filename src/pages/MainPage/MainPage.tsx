@@ -13,7 +13,7 @@ const MainPage: React.FC = () => {
   const currentCity = useSelector((state) => state.hotels.currentCity);
 
   useEffect(() => {
-    if (status == EStatus.IDLE) {
+    if (status === EStatus.IDLE) {
       dispatch(fetchOffers());
     }
   }, []);

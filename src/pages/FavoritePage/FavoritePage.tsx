@@ -31,7 +31,7 @@ const FavoritePage: React.FC = () => {
                       <li className="favorites__locations-items" key={`${key}_${index}`}>
                         <div className="favorites__locations locations locations--current">
                           <div className="locations__item">
-                            <a className="locations__item-link" href="#">
+                            <a className="locations__item-link">
                               <span>{key}</span>
                             </a>
                           </div>

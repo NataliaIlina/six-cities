@@ -32,11 +32,12 @@ const LoginPage: React.FC = () => {
               }}
             >
               <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">E-mail</label>
+                <label className="visually-hidden" htmlFor="email">E-mail</label>
                 <input
                   className="login__input form__input"
                   type="email"
                   name="email"
+                  id="email"
                   placeholder="Email"
                   required
                   value={email}
@@ -44,11 +45,12 @@ const LoginPage: React.FC = () => {
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">Password</label>
+                <label className="visually-hidden" htmlFor="password">Password</label>
                 <input
                   className="login__input form__input"
                   type="password"
                   name="password"
+                  id="password"
                   placeholder="Password"
                   required
                   value={password}

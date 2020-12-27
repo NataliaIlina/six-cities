@@ -13,7 +13,6 @@ const SortingSelect: React.FC = () => {
       <span className="places__sorting-caption">Sort by</span>
       <span
         className="places__sorting-type"
-        tabIndex={0}
         onClick={() => {
           openSelect(!isSelectOpen);
         }}
@@ -32,7 +31,6 @@ const SortingSelect: React.FC = () => {
           <li
             key={option}
             className={`places__option ${option === sortingValue ? 'places__option--active' : ''}`}
-            tabIndex={0}
             onClick={() => {
               dispatch(changeSortingValue(option));
               openSelect(!isSelectOpen);
