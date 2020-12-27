@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from "react";
-import { RATINGS, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH } from "src/constants";
-import { RatingStar } from "src/components";
+import React, { useState, useMemo } from 'react';
+import { RATINGS, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH } from 'src/constants';
+import { RatingStar } from 'src/components';
 
 interface ReviewFormProps {
   addComment: (id: number, rating: number, review: string) => void;
@@ -8,23 +8,22 @@ interface ReviewFormProps {
 }
 
 const ReviewForm: React.FC<ReviewFormProps> = ({ addComment, hotelId }) => {
-  const [review, setReview] = useState<string>("");
+  const [review, setReview] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
 
   const isFormValid = useMemo(
-    () =>
-      rating !== 0 &&
-      review &&
-      review.length >= MIN_REVIEW_LENGTH &&
-      review.length <= MAX_REVIEW_LENGTH,
-    [rating, review]
+    () => rating !== 0
+      && review
+      && review.length >= MIN_REVIEW_LENGTH
+      && review.length <= MAX_REVIEW_LENGTH,
+    [rating, review],
   );
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isFormValid) {
       addComment(hotelId, rating, review);
-      setReview("");
+      setReview('');
       setRating(0);
     }
   };
@@ -45,9 +44,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ addComment, hotelId }) => {
             key={value}
             value={value}
             title={title}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setRating(parseInt(e.target.value, 10))
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRating(parseInt(e.target.value, 10))}
             isActive={value <= rating}
           />
         ))}
@@ -58,16 +55,22 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ addComment, hotelId }) => {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={review}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-          setReview(e.target.value)
-        }
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setReview(e.target.value)}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set{` `}
-          <span className="reviews__star">rating</span> and describe your stay
-          with at least{` `}
-          <b className="reviews__text-amount">{MIN_REVIEW_LENGTH} characters</b>
+          To submit review please make sure to set
+          {' '}
+          <span className="reviews__star">rating</span>
+          {' '}
+          and describe your stay
+          with at least
+          {' '}
+          <b className="reviews__text-amount">
+            {MIN_REVIEW_LENGTH}
+            {' '}
+            characters
+          </b>
           .
         </p>
         <button

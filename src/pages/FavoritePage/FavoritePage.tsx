@@ -17,26 +17,26 @@ const FavoritePage: React.FC = () => {
 
   return (
     <Layout>
-      <main className='page__main page__main--favorites'>
-        <div className='page__favorites-container container'>
+      <main className="page__main page__main--favorites">
+        <div className="page__favorites-container container">
           {status === EStatus.LOADING && <p>Loading...</p>}
           {status === EStatus.ERROR && <p>Error...</p>}
           {status === EStatus.SUCCESS && (
             <>
               {Object.keys(data).length ? (
-                <section className='favorites'>
-                  <h1 className='favorites__title'>Saved listing</h1>
-                  <ul className='favorites__list'>
+                <section className="favorites">
+                  <h1 className="favorites__title">Saved listing</h1>
+                  <ul className="favorites__list">
                     {Object.keys(data).map((key, index) => (
-                      <li className='favorites__locations-items' key={`${key}_${index}`}>
-                        <div className='favorites__locations locations locations--current'>
-                          <div className='locations__item'>
-                            <a className='locations__item-link' href='#'>
+                      <li className="favorites__locations-items" key={`${key}_${index}`}>
+                        <div className="favorites__locations locations locations--current">
+                          <div className="locations__item">
+                            <a className="locations__item-link" href="#">
                               <span>{key}</span>
                             </a>
                           </div>
                         </div>
-                        <div className='favorites__places'>
+                        <div className="favorites__places">
                           {data[key].map((it) => (
                             <FavoriteCard offer={it} key={it.id} />
                           ))}

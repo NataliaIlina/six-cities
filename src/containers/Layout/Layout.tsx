@@ -8,8 +8,8 @@ const Layout: React.FC<{ type?: 'login' | 'main' }> = ({ children, type }) => {
   return (
     <div
       className={`page
-    ${type === `login` ? `page--login page--gray` : ``}
-    ${type === `main` ? `page--main page--gray` : ``}`}
+    ${type === 'login' ? 'page--login page--gray' : ''}
+    ${type === 'main' ? 'page--main page--gray' : ''}`}
     >
       <SvgSprite />
       <Header userData={userData} />

@@ -7,7 +7,7 @@ export enum EStatus {
 
 export type TAsyncData<T> =
   | {
-      data: T | null;
-      status: EStatus.IDLE | EStatus.LOADING | EStatus.ERROR;
-    }
+    data: T | null;
+    status: EStatus.IDLE | EStatus.LOADING | EStatus.ERROR;
+  }
   | { data: T; status: EStatus.SUCCESS };

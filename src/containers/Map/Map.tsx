@@ -12,7 +12,7 @@ const Map: React.FC<{ offers: TOffer[] }> = ({ offers }) => {
   const markersRef = useRef<any>();
 
   const coords = [currentCity.location.latitude, currentCity.location.longitude];
-  const zoom = currentCity.location.zoom;
+  const { zoom } = currentCity.location;
   const icon = leaflet.icon({
     iconUrl: `${BASE_URL}/img/pin.svg`,
     iconSize: [30, 30],
@@ -44,17 +44,15 @@ const Map: React.FC<{ offers: TOffer[] }> = ({ offers }) => {
     map.setView(coords, zoom);
 
     leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
+      .tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       })
       .addTo(map);
 
-    const markers = offers.map((offer) => {
-      return leaflet.marker([offer.location.latitude, offer.location.longitude], {
-        icon,
-        offerId: offer.id,
-      });
-    });
+    const markers = offers.map((offer) => leaflet.marker([offer.location.latitude, offer.location.longitude], {
+      icon,
+      offerId: offer.id,
+    }));
 
     leaflet.layerGroup(markers).addTo(map);
     markersRef.current = markers;
@@ -78,7 +76,7 @@ const Map: React.FC<{ offers: TOffer[] }> = ({ offers }) => {
     }
   }, [activeOfferId]);
 
-  return <div id='map' style={{ height: `100%` }} ref={mapRef} />;
+  return <div id="map" style={{ height: '100%' }} ref={mapRef} />;
 };
 
 export default Map;

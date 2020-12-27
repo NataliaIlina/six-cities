@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const FavoritesEmpty: React.FC = () => (
   <section className="favorites favorites--empty">

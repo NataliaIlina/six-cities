@@ -9,29 +9,29 @@ const SortingSelect: React.FC = () => {
   const sortingValue = useSelector((state) => state.hotels.sortingValue);
 
   return (
-    <form className='places__sorting' action='#' method='get'>
-      <span className='places__sorting-caption'>Sort by</span>
+    <form className="places__sorting" action="#" method="get">
+      <span className="places__sorting-caption">Sort by</span>
       <span
-        className='places__sorting-type'
+        className="places__sorting-type"
         tabIndex={0}
         onClick={() => {
           openSelect(!isSelectOpen);
         }}
       >
         {SORTING_TITLE[sortingValue]}
-        <svg className='places__sorting-arrow' width='7' height='4'>
-          <use xlinkHref='#icon-arrow-select' />
+        <svg className="places__sorting-arrow" width="7" height="4">
+          <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
       <ul
         className={`places__options places__options--custom ${
-          isSelectOpen ? `places__options--opened` : ``
+          isSelectOpen ? 'places__options--opened' : ''
         }`}
       >
         {SORTING_OPTIONS.map((option: string) => (
           <li
             key={option}
-            className={`places__option ${option === sortingValue ? `places__option--active` : ``}`}
+            className={`places__option ${option === sortingValue ? 'places__option--active' : ''}`}
             tabIndex={0}
             onClick={() => {
               dispatch(changeSortingValue(option));
