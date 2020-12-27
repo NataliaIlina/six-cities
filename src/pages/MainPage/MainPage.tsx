@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
-import { fetchOffers, offersSelector } from 'src/ducks/hotels/hotels';
-import {
-  Layout, CitiesList, OffersList, SortingSelect, Map,
-} from 'src/containers';
-import { useDispatch, useSelector } from 'src/store';
-import { EStatus } from 'src/models/common';
+import React, {useEffect} from 'react';
+import {fetchOffers, offersSelector} from 'src/ducks/hotels/hotels';
+import {Layout, CitiesList, OffersList, SortingSelect, Map} from 'src/containers';
+import {useDispatch, useSelector} from 'src/store';
+import {EStatus} from 'src/models/common';
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -22,7 +20,7 @@ const MainPage: React.FC = () => {
     <Layout type="main">
       <main className="page__main page__main--index">
         {status === EStatus.ERROR && <p>Произошла ошибка при загрузке данных</p>}
-        {status === EStatus.LOADING && <p style={{ textAlign: 'center' }}>Loading...</p>}
+        {status === EStatus.LOADING && <p style={{textAlign: 'center'}}>Loading...</p>}
         {status === EStatus.SUCCESS && (
           <>
             <h1 className="visually-hidden">Cities</h1>
@@ -32,9 +30,7 @@ const MainPage: React.FC = () => {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">
-                    {offers.length}
-                    {' '}
-                    places to stay in
+                    {offers.length} places to stay in
                     {currentCity.name}
                   </b>
                   <SortingSelect />

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'src/store';
-import { changeCurrentCity } from 'src/ducks/hotels/hotels';
+import {useDispatch, useSelector} from 'src/store';
+import {changeCurrentCity} from 'src/ducks/hotels/hotels';
 
 const CitiesList: React.FC = () => {
   const dispatch = useDispatch();

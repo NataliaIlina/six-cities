@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Layout } from 'src/containers';
-import { Redirect } from 'react-router-dom';
-import { Link } from 'src/components';
-import { BASE_URL } from 'src/constants';
-import { useDispatch, useSelector } from 'src/store';
-import { authorizeUser } from 'src/ducks/auth/auth';
+import React, {useState} from 'react';
+import {Layout} from 'src/containers';
+import {Redirect} from 'react-router-dom';
+import {Link} from 'src/components';
+import {BASE_URL} from 'src/constants';
+import {useDispatch, useSelector} from 'src/store';
+import {authorizeUser} from 'src/ducks/auth/auth';
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,11 +28,13 @@ const LoginPage: React.FC = () => {
               method="post"
               onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
                 e.preventDefault();
-                dispatch(authorizeUser({ email, password }));
+                dispatch(authorizeUser({email, password}));
               }}
             >
               <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden" htmlFor="email">E-mail</label>
+                <label className="visually-hidden" htmlFor="email">
+                  E-mail
+                </label>
                 <input
                   className="login__input form__input"
                   type="email"
@@ -41,11 +43,15 @@ const LoginPage: React.FC = () => {
                   placeholder="Email"
                   required
                   value={email}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setEmail(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                    setEmail(e.target.value)
+                  }
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden" htmlFor="password">Password</label>
+                <label className="visually-hidden" htmlFor="password">
+                  Password
+                </label>
                 <input
                   className="login__input form__input"
                   type="password"
@@ -54,7 +60,9 @@ const LoginPage: React.FC = () => {
                   placeholder="Password"
                   required
                   value={password}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setPassword(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                    setPassword(e.target.value)
+                  }
                 />
               </div>
               <button className="login__submit form__submit button" type="submit">

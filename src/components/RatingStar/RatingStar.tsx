@@ -7,12 +7,7 @@ interface RatingStarProps {
   isActive: boolean;
 }
 
-const RatingStar: React.FC<RatingStarProps> = ({
-  value,
-  title,
-  onChange,
-  isActive,
-}) => (
+const RatingStar: React.FC<RatingStarProps> = ({value, title, onChange, isActive}) => (
   <>
     <input
       className="form__rating-input visually-hidden"
@@ -31,7 +26,7 @@ const RatingStar: React.FC<RatingStarProps> = ({
         className="form__star-image"
         width="37"
         height="33"
-        style={{ fill: isActive ? '#FF9000' : '#c7c7c7' }}
+        style={{fill: isActive ? '#FF9000' : '#c7c7c7'}}
       >
         <use xlinkHref="#icon-star" />
       </svg>

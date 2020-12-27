@@ -1,6 +1,6 @@
 import React from 'react';
-import { TOffer } from 'src/ducks/hotels/hotelsModels';
-import { useHistory } from 'react-router-dom';
+import {TOffer} from 'src/ducks/hotels/hotelsModels';
+import {useHistory} from 'react-router-dom';
 
 type TProps = {
   offer: TOffer;
@@ -9,12 +9,7 @@ type TProps = {
   isUserAuth: boolean;
 };
 
-const PlaceCard: React.FC<TProps> = ({
-  offer,
-  toggleFavoriteStatus,
-  setActiveOffer,
-  isUserAuth,
-}) => {
+const PlaceCard: React.FC<TProps> = ({offer, toggleFavoriteStatus, setActiveOffer, isUserAuth}) => {
   const history = useHistory();
 
   return (
@@ -70,7 +65,7 @@ const PlaceCard: React.FC<TProps> = ({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${(offer.rating * 100) / 5}%` }} />
+            <span style={{width: `${(offer.rating * 100) / 5}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

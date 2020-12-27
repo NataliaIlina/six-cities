@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { SORTING_OPTIONS, SORTING_TITLE } from 'src/constants';
-import { useDispatch, useSelector } from 'src/store';
-import { changeSortingValue } from 'src/ducks/hotels/hotels';
+import React, {useState} from 'react';
+import {SORTING_OPTIONS, SORTING_TITLE} from 'src/constants';
+import {useDispatch, useSelector} from 'src/store';
+import {changeSortingValue} from 'src/ducks/hotels/hotels';
 
 const SortingSelect: React.FC = () => {
   const [isSelectOpen, openSelect] = useState(false);
