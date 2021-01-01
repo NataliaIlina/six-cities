@@ -14,39 +14,37 @@ const MainPage: React.FC = () => {
     if (status === EStatus.IDLE) {
       dispatch(fetchOffers());
     }
-  }, []);
+  }, [dispatch, status]);
 
   return (
-    <Layout type="main">
-      <main className="page__main page__main--index">
-        {status === EStatus.ERROR && <p>Произошла ошибка при загрузке данных</p>}
-        {status === EStatus.LOADING && <p style={{textAlign: 'center'}}>Loading...</p>}
-        {status === EStatus.SUCCESS && (
-          <>
-            <h1 className="visually-hidden">Cities</h1>
-            <CitiesList />
-            <div className="cities__places-wrapper">
-              <div className="cities__places-container container">
-                <section className="cities__places places">
-                  <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">
-                    {offers.length} places to stay in
-                    {currentCity.name}
-                  </b>
-                  <SortingSelect />
-                  <OffersList offers={offers} />
-                </section>
+    <Layout background="#f5f5f5">
+      {status === EStatus.ERROR && <p>Произошла ошибка при загрузке данных</p>}
+      {status === EStatus.LOADING && <p style={{textAlign: 'center'}}>Loading...</p>}
+      {status === EStatus.SUCCESS && (
+        <>
+          <h1 className="visually-hidden">Cities</h1>
+          <CitiesList />
+          <div className="cities__places-wrapper">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">
+                  {offers.length} places to stay in
+                  {currentCity.name}
+                </b>
+                <SortingSelect />
+                <OffersList offers={offers} />
+              </section>
 
-                <div className="cities__right-section">
-                  <section className="cities__map map">
-                    <Map offers={offers} />
-                  </section>
-                </div>
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map offers={offers} />
+                </section>
               </div>
             </div>
-          </>
-        )}
-      </main>
+          </div>
+        </>
+      )}
     </Layout>
   );
 };

@@ -16,69 +16,67 @@ const LoginPage: React.FC = () => {
   return isUserAuth ? (
     <Redirect to={BASE_URL} />
   ) : (
-    <Layout type="login">
-      <main className="page__main page__main--login">
-        <div className="page__login-container container">
-          <section className="login">
-            <h1 className="login__title">Sign in</h1>
-            <form
-              className="login__form form"
-              autoComplete="off"
-              action="#"
-              method="post"
-              onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
-                e.preventDefault();
-                dispatch(authorizeUser({email, password}));
-              }}
-            >
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden" htmlFor="email">
-                  E-mail
-                </label>
-                <input
-                  className="login__input form__input"
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                  required
-                  value={email}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                    setEmail(e.target.value)
-                  }
-                />
-              </div>
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden" htmlFor="password">
-                  Password
-                </label>
-                <input
-                  className="login__input form__input"
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  required
-                  value={password}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                    setPassword(e.target.value)
-                  }
-                />
-              </div>
-              <button className="login__submit form__submit button" type="submit">
-                Sign in
-              </button>
-            </form>
-          </section>
-          <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <Link className="locations__item-link" to="/">
-                <span>Amsterdam</span>
-              </Link>
+    <Layout withImage background="#f5f5f5">
+      <div className="page__login-container container">
+        <section className="login">
+          <h1 className="login__title">Sign in</h1>
+          <form
+            className="login__form form"
+            autoComplete="off"
+            action="#"
+            method="post"
+            onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+              e.preventDefault();
+              dispatch(authorizeUser({email, password}));
+            }}
+          >
+            <div className="login__input-wrapper form__input-wrapper">
+              <label className="visually-hidden" htmlFor="email">
+                E-mail
+              </label>
+              <input
+                className="login__input form__input"
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                required
+                value={email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                  setEmail(e.target.value)
+                }
+              />
             </div>
-          </section>
-        </div>
-      </main>
+            <div className="login__input-wrapper form__input-wrapper">
+              <label className="visually-hidden" htmlFor="password">
+                Password
+              </label>
+              <input
+                className="login__input form__input"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                required
+                value={password}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                  setPassword(e.target.value)
+                }
+              />
+            </div>
+            <button className="login__submit form__submit button" type="submit">
+              Sign in
+            </button>
+          </form>
+        </section>
+        <section className="locations locations--login locations--current">
+          <div className="locations__item">
+            <Link className="locations__item-link" to="/">
+              <span>Amsterdam</span>
+            </Link>
+          </div>
+        </section>
+      </div>
     </Layout>
   );
 };
