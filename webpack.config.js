@@ -80,7 +80,9 @@ module.exports = {
       {
         test: /\.(ttf|woff|woff2)$/,
         loader: 'file-loader',
+
         options: {
+          name: '[name].[ext]',
           publicPath: isDev ? '' : '/six-cities/',
         },
       },

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import BaseLink from 'components/Link/Link';
+import BaseLink from 'components/BaseLink/BaseLink';
 
 export const SHeader = styled.header`
   width: 1144px;

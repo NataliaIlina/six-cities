@@ -15,12 +15,19 @@ module.exports = {
   rules: {
     'react/no-array-index-key': 0,
     'react/jsx-props-no-spreading': 0,
+    'react/jsx-curly-brace-presence': ['error', 'never'],
   },
   overrides: [
     {
       files: ['**/*.tsx'],
       rules: {
-        'react/prop-types': 'off',
+        'react/prop-types': 0,
+      },
+    },
+    {
+      files: ['**/*.styled.ts'],
+      rules: {
+        'import/prefer-default-export': 0,
       },
     },
   ],

@@ -10,4 +10,4 @@ export type TAsyncData<T> =
       data: T | null;
       status: EStatus.IDLE | EStatus.LOADING | EStatus.ERROR;
     }
-  | {data: T; status: EStatus.SUCCESS};
+  | { data: T; status: EStatus.SUCCESS };

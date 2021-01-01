@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
-import {Layout} from 'src/containers';
-import {Redirect} from 'react-router-dom';
-import {Link} from 'src/components';
-import {BASE_URL} from 'src/constants';
-import {useDispatch, useSelector} from 'src/store';
-import {authorizeUser} from 'src/ducks/auth/auth';
+import React, { useState } from 'react';
+import { Layout } from 'src/containers';
+import { Redirect } from 'react-router-dom';
+import { BASE_URL } from 'src/constants';
+import { useDispatch, useSelector } from 'src/store';
+import { authorizeUser } from 'src/ducks/auth/auth';
+import TextField from 'components/TextField/TextField';
+import LocationLink from 'components/LocationLink/LocationLink';
+import { SWrapper, SLoginForm, STitle } from './LoginPage.styled';
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -13,70 +15,55 @@ const LoginPage: React.FC = () => {
 
   const isUserAuth = useSelector((state) => state.auth.isUserAuth);
 
-  return isUserAuth ? (
-    <Redirect to={BASE_URL} />
-  ) : (
+  if (isUserAuth) {
+    return <Redirect to={BASE_URL} />;
+  }
+
+  return (
     <Layout withImage background="#f5f5f5">
-      <div className="page__login-container container">
-        <section className="login">
-          <h1 className="login__title">Sign in</h1>
+      <SWrapper>
+        <SLoginForm>
+          <STitle>Sign in</STitle>
           <form
-            className="login__form form"
             autoComplete="off"
             action="#"
             method="post"
             onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
               e.preventDefault();
-              dispatch(authorizeUser({email, password}));
+              dispatch(authorizeUser({ email, password }));
             }}
           >
-            <div className="login__input-wrapper form__input-wrapper">
-              <label className="visually-hidden" htmlFor="email">
-                E-mail
-              </label>
-              <input
-                className="login__input form__input"
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-                required
-                value={email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                  setEmail(e.target.value)
-                }
-              />
-            </div>
-            <div className="login__input-wrapper form__input-wrapper">
-              <label className="visually-hidden" htmlFor="password">
-                Password
-              </label>
-              <input
-                className="login__input form__input"
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                required
-                value={password}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                  setPassword(e.target.value)
-                }
-              />
-            </div>
+            <TextField
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <TextField
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <button className="login__submit form__submit button" type="submit">
               Sign in
             </button>
           </form>
-        </section>
-        <section className="locations locations--login locations--current">
-          <div className="locations__item">
-            <Link className="locations__item-link" to="/">
-              <span>Amsterdam</span>
-            </Link>
-          </div>
-        </section>
-      </div>
+        </SLoginForm>
+
+        <SWrapper alignItems="center" justifyContent="center" pb={200}>
+          <LocationLink to="/" isActive>
+            Amsterdam
+          </LocationLink>
+        </SWrapper>
+      </SWrapper>
     </Layout>
   );
 };

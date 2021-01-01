@@ -1,13 +1,13 @@
-import React, {useState, useMemo} from 'react';
-import {RATINGS, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH} from 'src/constants';
-import {RatingStar} from 'src/components';
+import React, { useState, useMemo } from 'react';
+import { RATINGS, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH } from 'src/constants';
+import { RatingStar } from 'src/components';
 
 interface ReviewFormProps {
   addComment: (id: number, rating: number, review: string) => void;
   hotelId: number;
 }
 
-const ReviewForm: React.FC<ReviewFormProps> = ({addComment, hotelId}) => {
+const ReviewForm: React.FC<ReviewFormProps> = ({ addComment, hotelId }) => {
   const [review, setReview] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
 
@@ -35,7 +35,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({addComment, hotelId}) => {
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {RATINGS.map(({value, title}) => (
+        {RATINGS.map(({ value, title }) => (
           <RatingStar
             key={value}
             value={value}

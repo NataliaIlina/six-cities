@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
-import {MainPage, OfferPage, FavoritePage, LoginPage} from 'src/pages';
-import {Switch, Route} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { MainPage, OfferPage, FavoritePage, LoginPage } from 'src/pages';
+import { Switch, Route } from 'react-router-dom';
 import withPrivateRoute from 'src/hocs';
-import {fetchUser} from 'src/ducks/auth/auth';
-import {BASE_URL} from 'src/constants';
-import {useDispatch} from 'src/store';
+import { fetchUser } from 'src/ducks/auth/auth';
+import { BASE_URL } from 'src/constants';
+import { useDispatch } from 'src/store';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();

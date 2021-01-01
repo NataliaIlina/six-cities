@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
-import {fetchOffers, offersSelector} from 'src/ducks/hotels/hotels';
-import {Layout, CitiesList, OffersList, SortingSelect, Map} from 'src/containers';
-import {useDispatch, useSelector} from 'src/store';
-import {EStatus} from 'src/models/common';
+import React, { useEffect } from 'react';
+import { fetchOffers, offersSelector } from 'src/ducks/hotels/hotels';
+import { Layout, CitiesList, OffersList, SortingSelect, Map } from 'src/containers';
+import { useDispatch, useSelector } from 'src/store';
+import { EStatus } from 'src/models/common';
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const MainPage: React.FC = () => {
   return (
     <Layout background="#f5f5f5">
       {status === EStatus.ERROR && <p>Произошла ошибка при загрузке данных</p>}
-      {status === EStatus.LOADING && <p style={{textAlign: 'center'}}>Loading...</p>}
+      {status === EStatus.LOADING && <p style={{ textAlign: 'center' }}>Loading...</p>}
       {status === EStatus.SUCCESS && (
         <>
           <h1 className="visually-hidden">Cities</h1>
