@@ -5,14 +5,14 @@ export const SLocationLink = styled(BaseLink).withConfig<{ isActive?: boolean }>
   shouldForwardProp: (prop) => prop !== 'isActive',
 })`
   display: block;
-  padding: 9px 21px 6px 11px;
+  padding: 8px 24px;
   font-size: 19px;
-  line-height: 1.211;
+  line-height: 1.2;
   font-weight: 300;
   font-style: oblique;
   transform: skew(-15deg);
-  border-radius: 3px;
-  transition: background 0.3s, color 0.3s, text-shadow 0.3s;
+  border-radius: 4px;
+  transition: all 0.3s;
 
   &:hover,
   &:focus {

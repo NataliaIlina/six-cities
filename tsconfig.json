@@ -11,7 +11,7 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["node_modules/@types", "@types"],
     "baseUrl": ".",
     "paths": {
       "pages/*": ["src/pages/*"],

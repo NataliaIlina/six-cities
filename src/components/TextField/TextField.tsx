@@ -15,7 +15,7 @@ const TextField: React.FC<TProps> = ({
   id,
   ...props
 }) => (
-  <Box mb={16}>
+  <Box mb={24}>
     {label ? <label htmlFor={id}>{label}</label> : null}
     <SInput
       name={name}
