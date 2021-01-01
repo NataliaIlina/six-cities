@@ -1,13 +1,13 @@
-import React, {useEffect} from 'react';
-import {Footer, FavoriteCard, FavoritesEmpty} from 'src/components';
-import {Layout} from 'src/containers';
-import {useDispatch, useSelector} from 'src/store';
-import {fetchFavorite} from 'src/ducks/hotels/hotels';
-import {EStatus} from 'src/models/common';
+import React, { useEffect } from 'react';
+import { Footer, FavoriteCard, FavoritesEmpty } from 'src/components';
+import { Layout } from 'src/containers';
+import { useDispatch, useSelector } from 'src/store';
+import { fetchFavorite } from 'src/ducks/hotels/hotels';
+import { EStatus } from 'src/models/common';
 
 const FavoritePage: React.FC = () => {
   const dispatch = useDispatch();
-  const {status, data} = useSelector((state) => state.hotels.favorite);
+  const { status, data } = useSelector((state) => state.hotels.favorite);
 
   useEffect(() => {
     if (status === EStatus.IDLE) {

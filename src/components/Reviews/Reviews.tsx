@@ -1,17 +1,17 @@
 import React from 'react';
-import {TComment} from 'src/ducks/comments/commentsModels';
+import { TComment } from 'src/ducks/comments/commentsModels';
 
 interface ReviewsProps {
   comments: TComment[];
 }
 
-const Reviews: React.FC<ReviewsProps> = ({comments}) => (
+const Reviews: React.FC<ReviewsProps> = ({ comments }) => (
   <ul className="reviews__list">
     <h2 className="reviews__title">
       Reviews &middot;
       <span className="reviews__amount">{comments.length}</span>
     </h2>
-    {comments.map(({comment, user, rating, id, date}) => {
+    {comments.map(({ comment, user, rating, id, date }) => {
       const reviewDate = new Date(date);
       const dateLocaleValue = reviewDate.toLocaleDateString('en', {
         month: 'long',
@@ -36,7 +36,7 @@ const Reviews: React.FC<ReviewsProps> = ({comments}) => (
           <div className="reviews__info">
             <div className="reviews__rating rating">
               <div className="reviews__stars rating__stars">
-                <span style={{width: `${(rating * 100) / 5}%`}} />
+                <span style={{ width: `${(rating * 100) / 5}%` }} />
                 <span className="visually-hidden">Rating</span>
               </div>
             </div>

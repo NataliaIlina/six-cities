@@ -1,12 +1,12 @@
 import React from 'react';
-import {Link} from 'src/components';
-import {TOffer} from 'src/ducks/hotels/hotelsModels';
+import { Link } from 'src/components';
+import { TOffer } from 'src/ducks/hotels/hotelsModels';
 
 interface FavoriteCardProps {
   offer: TOffer;
 }
 
-const FavoriteCard: React.FC<FavoriteCardProps> = ({offer}) => (
+const FavoriteCard: React.FC<FavoriteCardProps> = ({ offer }) => (
   <article className="favorites__card place-card">
     <div className="favorites__image-wrapper place-card__image-wrapper">
       <Link to={`/offer/${offer.id}`}>
@@ -40,7 +40,7 @@ const FavoriteCard: React.FC<FavoriteCardProps> = ({offer}) => (
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `${(offer.rating * 100) / 5}%`}} />
+          <span style={{ width: `${(offer.rating * 100) / 5}%` }} />
           <span className="visually-hidden">Rating</span>
         </div>
       </div>

@@ -1,10 +1,10 @@
-import React, {useCallback} from 'react';
-import {PlaceCard} from 'src/components';
-import {useDispatch, useSelector} from 'src/store';
-import {setActiveOffer, toggleFavoriteStatus} from 'src/ducks/hotels/hotels';
-import {TOffer} from 'src/ducks/hotels/hotelsModels';
+import React, { useCallback } from 'react';
+import { PlaceCard } from 'src/components';
+import { useDispatch, useSelector } from 'src/store';
+import { setActiveOffer, toggleFavoriteStatus } from 'src/ducks/hotels/hotels';
+import { TOffer } from 'src/ducks/hotels/hotelsModels';
 
-const OffersList: React.FC<{offers: TOffer[]}> = ({offers}) => {
+const OffersList: React.FC<{ offers: TOffer[] }> = ({ offers }) => {
   const dispatch = useDispatch();
   const isUserAuth = useSelector((state) => state.auth.isUserAuth);
 
@@ -13,7 +13,7 @@ const OffersList: React.FC<{offers: TOffer[]}> = ({offers}) => {
   }, []);
 
   const toggleFavoriteStatusHandler = useCallback((hotelId: number, status: 1 | 0) => {
-    dispatch(toggleFavoriteStatus({hotelId, status}));
+    dispatch(toggleFavoriteStatus({ hotelId, status }));
   }, []);
 
   return (

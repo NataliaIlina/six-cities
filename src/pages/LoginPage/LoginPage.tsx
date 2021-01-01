@@ -4,9 +4,9 @@ import { Redirect } from 'react-router-dom';
 import { BASE_URL } from 'src/constants';
 import { useDispatch, useSelector } from 'src/store';
 import { authorizeUser } from 'src/ducks/auth/auth';
-import { SWrapper, SLoginForm, STitle } from './LoginPage.styled';
 import TextField from 'components/TextField/TextField';
 import LocationLink from 'components/LocationLink/LocationLink';
+import { SWrapper, SLoginForm, STitle } from './LoginPage.styled';
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ const LoginPage: React.FC = () => {
           </form>
         </SLoginForm>
 
-        <SWrapper alignItems={'center'} justifyContent={'center'} pb={200}>
+        <SWrapper alignItems="center" justifyContent="center" pb={200}>
           <LocationLink to="/" isActive>
             Amsterdam
           </LocationLink>

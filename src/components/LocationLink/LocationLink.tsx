@@ -1,6 +1,6 @@
 import React from 'react';
-import { SLocationLink } from './LocationLink.styled';
 import type { TBaseLinkProps } from 'components/BaseLink/BaseLink';
+import { SLocationLink } from './LocationLink.styled';
 
 const LocationLink: React.FC<TBaseLinkProps & { isActive?: boolean }> = ({
   children,
