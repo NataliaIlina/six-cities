@@ -1,15 +1,15 @@
-import React, {useCallback, useEffect} from 'react';
-import {Redirect, useParams} from 'react-router-dom';
-import {Reviews, ReviewForm, PlaceCard} from 'src/components';
+import React, { useCallback, useEffect } from 'react';
+import { Redirect, useParams } from 'react-router-dom';
+import { Reviews, ReviewForm, PlaceCard } from 'src/components';
 
-import {Layout, Map} from 'src/containers';
-import {BASE_URL} from 'src/constants';
-import {useDispatch, useSelector} from 'src/store';
+import { Layout, Map } from 'src/containers';
+import { BASE_URL } from 'src/constants';
+import { useDispatch, useSelector } from 'src/store';
 
-import {fetchComments, addComment} from 'src/ducks/comments/comments';
-import {setActiveOffer, toggleFavoriteStatus, nearbyOffers} from 'src/ducks/hotels/hotels';
+import { fetchComments, addComment } from 'src/ducks/comments/comments';
+import { setActiveOffer, toggleFavoriteStatus, nearbyOffers } from 'src/ducks/hotels/hotels';
 
-import {EStatus} from 'src/models/common';
+import { EStatus } from 'src/models/common';
 
 const OfferPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,14 +19,14 @@ const OfferPage: React.FC = () => {
   const isUserAuth = useSelector((state) => state.auth.isUserAuth);
   const offer = useSelector((state) => state.hotels.activeOffer);
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(fetchComments(parseInt(id, 10)));
   }, []);
 
   const addCommentHandler = useCallback((hotelId, rating, comment) => {
-    dispatch(addComment({hotelId, rating, comment}));
+    dispatch(addComment({ hotelId, rating, comment }));
   }, []);
 
   const setActiveOfferHandler = useCallback((o) => {
@@ -34,7 +34,7 @@ const OfferPage: React.FC = () => {
   }, []);
 
   const toggleFavoriteStatusHandler = useCallback((hotelId: number, status: 1 | 0) => {
-    dispatch(toggleFavoriteStatus({hotelId, status}));
+    dispatch(toggleFavoriteStatus({ hotelId, status }));
   }, []);
 
   return offer ? (
@@ -80,7 +80,7 @@ const OfferPage: React.FC = () => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${(offer.rating * 100) / 5}%`}} />
+                  <span style={{ width: `${(offer.rating * 100) / 5}%` }} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{offer.rating}</span>

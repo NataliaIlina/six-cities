@@ -6,5 +6,5 @@ module.exports = {
   semi: true,
   useTabs: false,
   jsxSingleQuote: false,
-  bracketSpacing: false,
+  bracketSpacing: true,
 };

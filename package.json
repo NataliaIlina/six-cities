@@ -34,6 +34,8 @@
     "@types/react": "16.9.35",
     "@types/react-redux": "^7.1.14",
     "@types/react-router-dom": "5.1.5",
+    "@types/reflexbox": "^4.0.2",
+    "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "babel-loader": "8.1.0",
     "babel-plugin-styled-components": "^1.12.0",
