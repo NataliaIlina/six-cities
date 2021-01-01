@@ -3,7 +3,7 @@ import { Header, SvgSprite } from 'src/components';
 import type { BackgroundProps } from 'styled-system';
 import Footer from 'components/Footer/Footer';
 import { useSelector } from 'src/hooks';
-import { SLayout, SContent } from './Layout.styled';
+import { SLayout, SContent, SMain } from './Layout.styled';
 
 type TProps = {
   withImage?: boolean;
@@ -23,7 +23,7 @@ const Layout: React.FC<TProps> = ({
       <SContent withImage={withImage}>
         <SvgSprite />
         <Header userData={userData} />
-        <main>{children}</main>
+        <SMain>{children}</SMain>
         {withFooter && <Footer />}
       </SContent>
     </SLayout>

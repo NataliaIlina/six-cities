@@ -1,6 +1,6 @@
-import styled, {css} from 'styled-components';
-import {background} from 'styled-system';
-import type {BackgroundProps} from 'styled-system';
+import styled, { css } from 'styled-components';
+import { background } from 'styled-system';
+import type { BackgroundProps } from 'styled-system';
 
 export const SLayout = styled.div<BackgroundProps>`
   background-color: #ffffff;
@@ -8,7 +8,7 @@ export const SLayout = styled.div<BackgroundProps>`
   ${background}
 `;
 
-export const SContent = styled.div.withConfig<{withImage: boolean}>({
+export const SContent = styled.div.withConfig<{ withImage: boolean }>({
   shouldForwardProp: (prop) => prop !== 'withImage',
 })`
   display: flex;
@@ -27,4 +27,11 @@ export const SContent = styled.div.withConfig<{withImage: boolean}>({
       background-repeat: no-repeat, no-repeat;
       background-size: auto, auto 100%;
     `}
+`;
+
+export const SMain = styled.main`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
 `;

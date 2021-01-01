@@ -1,6 +1,9 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'src/store';
+import { useDispatch, useSelector } from 'src/hooks';
 import { changeCurrentCity } from 'src/ducks/hotels/hotels';
+import LocationLink from 'components/LocationLink/LocationLink';
+import { Box } from 'reflexbox';
+import { SList } from './CitiesList.styled';
 
 const CitiesList: React.FC = () => {
   const dispatch = useDispatch();
@@ -8,28 +11,25 @@ const CitiesList: React.FC = () => {
   const currentCity = useSelector((state) => state.hotels.currentCity);
 
   return (
-    <div className="cities tabs">
-      <section className="locations container">
-        <ul className="locations__list tabs__list">
-          {cities.map((city, index) => (
-            <li className="locations__item" key={`${city.name}_${index}`}>
-              <a
-                className={`locations__item-link tabs__item ${
-                  currentCity.name === city.name ? 'tabs__item--active' : ''
-                }`}
-                href="#"
+    <Box px={36}>
+      <SList>
+        {cities.map((city) => (
+          <Box mr={32} key={city.name}>
+            <li>
+              <LocationLink
+                isActive={currentCity.name === city.name}
                 onClick={(e: React.MouseEvent) => {
                   e.preventDefault();
                   dispatch(changeCurrentCity(city));
                 }}
               >
-                <span>{city.name}</span>
-              </a>
+                {city.name}
+              </LocationLink>
             </li>
-          ))}
-        </ul>
-      </section>
-    </div>
+          </Box>
+        ))}
+      </SList>
+    </Box>
   );
 };
 

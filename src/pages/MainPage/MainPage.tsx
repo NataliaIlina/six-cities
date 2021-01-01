@@ -3,6 +3,7 @@ import { fetchOffers, offersSelector } from 'src/ducks/hotels/hotels';
 import { Layout, CitiesList, OffersList, SortingSelect, Map } from 'src/containers';
 import { useDispatch, useSelector } from 'src/store';
 import { EStatus } from 'src/models/common';
+import { SWrapper, SOffersSection, SOffersTitle, SMapSection } from './MainPage.styled';
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -22,27 +23,22 @@ const MainPage: React.FC = () => {
       {status === EStatus.LOADING && <p style={{ textAlign: 'center' }}>Loading...</p>}
       {status === EStatus.SUCCESS && (
         <>
-          <h1 className="visually-hidden">Cities</h1>
           <CitiesList />
-          <div className="cities__places-wrapper">
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">
-                  {offers.length} places to stay in
-                  {currentCity.name}
-                </b>
-                <SortingSelect />
-                <OffersList offers={offers} />
-              </section>
+          <SWrapper>
+            <SOffersSection>
+              <SOffersTitle>
+                {`${offers.length} places to stay in ${currentCity.name}`}
+              </SOffersTitle>
+              <SortingSelect />
+              <OffersList offers={offers} />
+            </SOffersSection>
 
-              <div className="cities__right-section">
-                <section className="cities__map map">
-                  <Map offers={offers} />
-                </section>
-              </div>
-            </div>
-          </div>
+            <SMapSection>
+              <section>
+                <Map offers={offers} />
+              </section>
+            </SMapSection>
+          </SWrapper>
         </>
       )}
     </Layout>

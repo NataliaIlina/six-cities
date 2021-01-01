@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { BASE_URL } from 'src/constants';
 
 export type TBaseLinkProps = {
-  to: string;
+  to?: string;
+  onClick?: (e: React.MouseEvent) => void;
 };
 
-const BaseLink: React.FC<TBaseLinkProps> = ({ children, to, ...props }) => (
+const BaseLink: React.FC<TBaseLinkProps> = ({ children, to = '/', ...props }) => (
   <Link to={`${BASE_URL}${to}`} {...props}>
     {children}
   </Link>
