@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const SWrapper = styled.div`
   display: flex;
-  overflow: hidden;
+  overflow-y: hidden;
   padding-left: 58px;
   padding-right: 58px;
 `;

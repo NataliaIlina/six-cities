@@ -16,7 +16,6 @@ export const SContent = styled.div.withConfig<{ withImage: boolean }>({
   width: 1144px;
   margin: 0 auto;
   height: 100vh;
-  overflow: hidden;
 
   ${(props) =>
     props.withImage &&
@@ -29,9 +28,9 @@ export const SContent = styled.div.withConfig<{ withImage: boolean }>({
     `}
 `;
 
-export const SMain = styled.main`
+export const SMain = styled.main<{ withOverflow?: boolean }>`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: hidden;
+  overflow: ${(props) => (props.withOverflow ? 'visible' : 'hidden')};
 `;

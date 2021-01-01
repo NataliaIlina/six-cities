@@ -1,8 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import leaflet from 'leaflet';
 import { BASE_URL } from 'src/constants';
 import { useSelector } from 'src/store';
 import { TOffer } from 'src/ducks/hotels/hotelsModels';
+
+const icon = leaflet.icon({
+  iconUrl: `${BASE_URL}/img/pin.svg`,
+  iconSize: [30, 30],
+});
+
+const activeIcon = leaflet.icon({
+  iconUrl: `${BASE_URL}/img/pin-active.svg`,
+  iconSize: [30, 30],
+});
 
 const Map: React.FC<{ offers: TOffer[] }> = ({ offers }) => {
   const currentCity = useSelector((state) => state.hotels.currentCity);
@@ -13,24 +23,16 @@ const Map: React.FC<{ offers: TOffer[] }> = ({ offers }) => {
 
   const coords = [currentCity.location.latitude, currentCity.location.longitude];
   const { zoom } = currentCity.location;
-  const icon = leaflet.icon({
-    iconUrl: `${BASE_URL}/img/pin.svg`,
-    iconSize: [30, 30],
-  });
-  const activeIcon = leaflet.icon({
-    iconUrl: `${BASE_URL}/img/pin-active.svg`,
-    iconSize: [30, 30],
-  });
 
-  const highlightCurrentOfferMarker = () => {
+  const highlightCurrentOfferMarker = useCallback(() => {
     markersRef.current
       .find((marker) => marker.options.offerId === activeOfferId)
       .setIcon(activeIcon);
-  };
+  }, [activeOfferId, markersRef]);
 
-  const paintOverMarkers = () => {
+  const paintOverMarkers = useCallback(() => {
     markersRef.current.forEach((m) => m.setIcon(icon));
-  };
+  }, []);
 
   useEffect(() => {
     const map = leaflet.map(mapRef.current, {
@@ -71,11 +73,10 @@ const Map: React.FC<{ offers: TOffer[] }> = ({ offers }) => {
   }, [currentCity, offers]);
 
   useEffect(() => {
+    paintOverMarkers();
+
     if (activeOfferId) {
-      paintOverMarkers();
       highlightCurrentOfferMarker();
-    } else {
-      paintOverMarkers();
     }
   }, [activeOfferId]);
 

@@ -8,12 +8,14 @@ import { SLayout, SContent, SMain } from './Layout.styled';
 type TProps = {
   withImage?: boolean;
   withFooter?: boolean;
+  isMain?: boolean;
 } & BackgroundProps;
 
 const Layout: React.FC<TProps> = ({
   children,
   withImage = false,
   withFooter = false,
+  isMain = false,
   ...props
 }) => {
   const userData = useSelector((state) => state.auth.user.data);
@@ -23,7 +25,7 @@ const Layout: React.FC<TProps> = ({
       <SContent withImage={withImage}>
         <SvgSprite />
         <Header userData={userData} />
-        <SMain>{children}</SMain>
+        <SMain withOverflow={!isMain}>{children}</SMain>
         {withFooter && <Footer />}
       </SContent>
     </SLayout>

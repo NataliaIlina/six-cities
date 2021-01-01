@@ -5,7 +5,7 @@ export const SLocationLink = styled(BaseLink).withConfig<{ isActive?: boolean }>
   shouldForwardProp: (prop) => prop !== 'isActive',
 })`
   display: block;
-  padding: 8px 24px;
+  padding: 8px 16px;
   font-size: 19px;
   line-height: 1.2;
   font-weight: 300;

@@ -18,7 +18,7 @@ const MainPage: React.FC = () => {
   }, [dispatch, status]);
 
   return (
-    <Layout background="#f5f5f5">
+    <Layout background="#f5f5f5" isMain>
       {status === EStatus.ERROR && <p>Произошла ошибка при загрузке данных</p>}
       {status === EStatus.LOADING && <p style={{ textAlign: 'center' }}>Loading...</p>}
       {status === EStatus.SUCCESS && (
