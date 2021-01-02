@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import PlaceCard from 'components/PlaceCard/PlaceCard';
-import { useDispatch, useSelector } from 'src/store';
+import { useDispatch, useSelector } from 'src/hooks';
 import { setActiveOffer, toggleFavoriteStatus } from 'src/ducks/hotels/hotels';
 import { TOffer } from 'src/ducks/hotels/hotelsModels';
 

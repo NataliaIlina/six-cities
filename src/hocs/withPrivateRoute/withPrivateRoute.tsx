@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { BASE_URL } from 'src/constants';
-import { useSelector } from 'src/store';
+import { useSelector } from 'src/hooks';
 
 interface PrivateRouteComponentProps {
   redirectPathname: string;

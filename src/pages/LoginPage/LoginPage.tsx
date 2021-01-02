@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Layout } from 'src/containers';
 import { Redirect } from 'react-router-dom';
 import { BASE_URL } from 'src/constants';
-import { useDispatch, useSelector } from 'src/store';
+import { useDispatch, useSelector } from 'src/hooks';
 import { authorizeUser } from 'src/ducks/auth/auth';
 import TextField from 'components/TextField/TextField';
 import LocationLink from 'components/LocationLink/LocationLink';

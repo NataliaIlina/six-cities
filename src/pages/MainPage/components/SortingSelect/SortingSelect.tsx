@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SORTING_OPTIONS, SORTING_TITLE } from 'src/constants';
-import { useDispatch, useSelector } from 'src/store';
+import { useDispatch, useSelector } from 'src/hooks';
 import { changeSortingValue } from 'src/ducks/hotels/hotels';
 
 const SortingSelect: React.FC = () => {

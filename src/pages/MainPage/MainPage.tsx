@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { fetchOffers, offersSelector } from 'src/ducks/hotels/hotels';
 import { Layout, CitiesList, OffersList, SortingSelect, Map } from 'src/containers';
-import { useDispatch, useSelector } from 'src/store';
+import { useDispatch, useSelector } from 'src/hooks';
 import { EStatus } from 'src/models/common';
 import { SWrapper, SOffersSection, SOffersTitle, SMapSection } from './MainPage.styled';
 

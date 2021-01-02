@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import leaflet from 'leaflet';
 import { BASE_URL } from 'src/constants';
-import { useSelector } from 'src/store';
+import { useSelector } from 'src/hooks';
 import { TOffer } from 'src/ducks/hotels/hotelsModels';
 
 const icon = leaflet.icon({

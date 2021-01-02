@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import FavoriteCard from 'pages/FavoritePage/components/FavoriteCard/FavoriteCard';
 import FavoritesEmpty from 'pages/FavoritePage/components/FavoritesEmpty/FavoritesEmpty';
 import { Layout } from 'src/containers';
-import { useDispatch, useSelector } from 'src/store';
+import { useDispatch, useSelector } from 'src/hooks';
 import { fetchFavorite } from 'src/ducks/hotels/hotels';
 import { EStatus } from 'src/models/common';
 
