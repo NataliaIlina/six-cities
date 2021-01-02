@@ -9,7 +9,7 @@ export const RATINGS = [
 export const MIN_REVIEW_LENGTH = 50;
 export const MAX_REVIEW_LENGTH = 300;
 
-export const SERVER_URL = `https://es31-server.appspot.com/six-cities`;
+export const SERVER_URL = `https://5.react.pages.academy/six-cities`;
 
 export const BASE_URL = process.env.NODE_ENV === 'development' ? '' : '/six-cities';
 
