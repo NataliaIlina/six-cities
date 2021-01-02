@@ -1,1 +1,1 @@
-export { default as withPrivateRoute } from "./withPrivateRoute/withPrivateRoute";
+export { default } from './withPrivateRoute/withPrivateRoute';

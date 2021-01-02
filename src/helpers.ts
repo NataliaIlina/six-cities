@@ -1,11 +1,8 @@
-import { IOffer, ICity } from "./interfaces";
+import { TOffer, TCity } from 'src/ducks/hotels/hotelsModels';
 
 const toCamel = (s: string) => {
-  return s.replace(/([-_][a-z])/gi, $1 => {
-    return $1
-      .toUpperCase()
-      .replace(`-`, ``)
-      .replace(`_`, ``);
+  return s.replace(/([-_][a-z])/gi, ($1) => {
+    return $1.toUpperCase().replace(`-`, ``).replace(`_`, ``);
   });
 };
 
@@ -17,13 +14,14 @@ export const transformKeysToCamel = (o: any) => {
   if (isObject(o)) {
     const n = {};
 
-    Object.keys(o).forEach(k => {
+    Object.keys(o).forEach((k) => {
       n[toCamel(k)] = transformKeysToCamel(o[k]);
     });
 
     return n;
-  } else if (Array.isArray(o)) {
-    return o.map(i => {
+  }
+  if (Array.isArray(o)) {
+    return o.map((i) => {
       return transformKeysToCamel(i);
     });
   }
@@ -31,26 +29,23 @@ export const transformKeysToCamel = (o: any) => {
   return o;
 };
 
-export const transformOffersForFavorite = (offers: IOffer[]) => {
+export const transformOffersForFavorite = (offers: TOffer[]) => {
   const cities = new Set<string>();
-  offers.forEach(offer => cities.add(offer.city.name));
+  offers.forEach((offer) => cities.add(offer.city.name));
   const favorites = {};
-  for (let item of cities.keys()) {
-    favorites[item] = offers.filter(o => o.city.name === item);
+
+  for (const item of cities.keys()) {
+    favorites[item] = offers.filter((o) => o.city.name === item);
   }
   return favorites;
 };
 
-export const getRandomNumber = (min: number, max: number) =>
-  Math.floor(min + Math.random() * (max + 1 - min));
-
-export const getCitiesFromOffers = (offers: IOffer[]) => {
-  const cities: ICity[] = [];
-  offers.forEach(offer => {
-    if (!cities.some(city => city.name === offer.city.name)) {
+export const getCitiesFromOffers = (offers: TOffer[]) => {
+  const cities: TCity[] = [];
+  offers.forEach((offer) => {
+    if (!cities.some((city) => city.name === offer.city.name)) {
       cities.push(offer.city);
     }
-    return;
   });
   return cities;
 };

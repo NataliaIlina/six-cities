@@ -1,25 +1,36 @@
-import React from "react";
-import { Header, SvgSprite } from "components";
-import { connect } from "react-redux";
-import { getUserData } from "reducer/user/selectors";
-import { LayoutProps, ComponentProps } from "./types";
-import { RootStateType } from "src/reducer";
+import React from 'react';
+import SvgSprite from 'components/SvgSprite/SvgSprite';
+import type { BackgroundProps } from 'styled-system';
+import Footer from 'containers/Layout/Footer/Footer';
+import Header from 'containers/Layout/Header/Header';
+import { useSelector } from 'src/hooks';
+import { SLayout, SContent, SMain } from './Layout.styled';
 
-const Layout: React.FC<LayoutProps> = ({ children, type, userData }) => (
-  <div
-    className={`page
-    ${type === `login` ? `page--login page--gray` : ``}
-    ${type === `main` ? `page--main page--gray` : ``}`}
-  >
-    <SvgSprite />
-    <Header userData={userData} />
-    {children}
-  </div>
-);
+type TProps = {
+  withImage?: boolean;
+  withFooter?: boolean;
+  isMain?: boolean;
+} & BackgroundProps;
 
-const mapStateToProps = (state: RootStateType, ownProps: ComponentProps) =>
-  Object.assign({}, ownProps, {
-    userData: getUserData(state)
-  });
+const Layout: React.FC<TProps> = ({
+  children,
+  withImage = false,
+  withFooter = false,
+  isMain = false,
+  ...props
+}) => {
+  const userData = useSelector((state) => state.auth.user.data);
 
-export default connect(mapStateToProps)(Layout);
+  return (
+    <SLayout {...props}>
+      <SContent withImage={withImage}>
+        <SvgSprite />
+        <Header userData={userData} />
+        <SMain withOverflow={!isMain}>{children}</SMain>
+        {withFooter && <Footer />}
+      </SContent>
+    </SLayout>
+  );
+};
+
+export default Layout;

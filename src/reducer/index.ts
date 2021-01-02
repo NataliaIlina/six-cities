@@ -1,13 +1,12 @@
-import { combineReducers } from "redux";
-import { reducer as user, UserState } from "./user/user";
-import { reducer as data, State } from "./data/data";
+import auth from 'src/ducks/auth/auth';
+import hotels from 'src/ducks/hotels/hotels';
+import comments from 'src/ducks/comments/comments';
+import { combineReducers } from '@reduxjs/toolkit';
 
-export default combineReducers({
-  USER: user,
-  DATA: data
+const rootReducer = combineReducers({
+  auth,
+  hotels,
+  comments,
 });
 
-export interface RootStateType {
-  user: UserState;
-  data: State;
-}
+export default rootReducer;
