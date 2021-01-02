@@ -1,16 +1,19 @@
 import React from 'react';
 import { TComment } from 'src/ducks/comments/commentsModels';
+import { Box } from 'reflexbox';
+import Rating from 'components/Rating/Rating';
+import { STitle, SReviewItem, SUser, SAvatar, SUserName, SComment, STime } from './Reviews.styled';
 
-interface ReviewsProps {
+type TProps = {
   comments: TComment[];
-}
+};
 
-const Reviews: React.FC<ReviewsProps> = ({ comments }) => (
-  <ul className="reviews__list">
-    <h2 className="reviews__title">
+const Reviews: React.FC<TProps> = ({ comments }) => (
+  <ul>
+    <STitle>
       Reviews &middot;
-      <span className="reviews__amount">{comments.length}</span>
-    </h2>
+      <span>{comments.length}</span>
+    </STitle>
     {comments.map(({ comment, user, rating, id, date }) => {
       const reviewDate = new Date(date);
       const dateLocaleValue = reviewDate.toLocaleDateString('en', {
@@ -20,32 +23,21 @@ const Reviews: React.FC<ReviewsProps> = ({ comments }) => (
       const dateTextValue = `${reviewDate.getFullYear()}-${reviewDate.getMonth()}-${reviewDate.getDay()}`;
 
       return (
-        <li className="reviews__item" key={id}>
-          <div className="reviews__user user">
-            <div className="reviews__avatar-wrapper user__avatar-wrapper">
-              <img
-                className="reviews__avatar user__avatar"
-                src={user.avatarUrl}
-                width="54"
-                height="54"
-                alt="Reviews avatar"
-              />
-            </div>
-            <span className="reviews__user-name">{user.name}</span>
+        <SReviewItem key={id}>
+          <SUser>
+            <SAvatar>
+              <img src={user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
+            </SAvatar>
+            <SUserName>{user.name}</SUserName>
+          </SUser>
+          <div>
+            <Box mb="8px">
+              <Rating rating={rating} width={98} height={16} />
+            </Box>
+            <SComment>{comment}</SComment>
+            <STime dateTime={dateTextValue}>{dateLocaleValue}</STime>
           </div>
-          <div className="reviews__info">
-            <div className="reviews__rating rating">
-              <div className="reviews__stars rating__stars">
-                <span style={{ width: `${(rating * 100) / 5}%` }} />
-                <span className="visually-hidden">Rating</span>
-              </div>
-            </div>
-            <p className="reviews__text">{comment}</p>
-            <time className="reviews__time" dateTime={dateTextValue}>
-              {dateLocaleValue}
-            </time>
-          </div>
-        </li>
+        </SReviewItem>
       );
     })}
   </ul>
