@@ -6,6 +6,11 @@ export const SIcon = styled.svg<{ isActive: boolean }>`
   stroke-width: 2;
   transition: fill 0.3s, stroke 0.3s;
 
+  path {
+    width: 100%;
+    height: 100%;
+  }
+
   ${(props) =>
     props.isActive &&
     css`

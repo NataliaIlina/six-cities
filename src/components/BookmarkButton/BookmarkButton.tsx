@@ -18,8 +18,14 @@ const BookmarkButton: React.FC<TProps> = ({
 }) => (
   <Box width={width} height={height} {...props}>
     <SIconButton type="button" onClick={onClick}>
-      <SIcon isActive={isActive} xmlns="http://www.w3.org/2000/svg" width={width} height={height}>
-        <path d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z" />
+      <SIcon
+        isActive={isActive}
+        xmlns="http://www.w3.org/2000/svg"
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+      >
+        <use xlinkHref="#icon-bookmark" />
       </SIcon>
     </SIconButton>
   </Box>

@@ -1,13 +1,14 @@
 import React from 'react';
+import { SPrice, SValue, SText } from './Price.styled';
 
 const Price: React.FC<{ price: number }> = ({ price }) => (
-  <div className="property__price">
-    <b className="property__price-value">
+  <SPrice>
+    <SValue>
       &euro;
       {price}
-    </b>
-    <span className="property__price-text">&nbsp;night</span>
-  </div>
+    </SValue>
+    <SText>&nbsp;night</SText>
+  </SPrice>
 );
 
 export default Price;

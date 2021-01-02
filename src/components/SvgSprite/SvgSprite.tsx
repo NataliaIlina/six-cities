@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SvgSprite = () => (
+const SvgSprite: React.FC = () => (
   <div style={{ display: 'none' }}>
     <svg xmlns="http://www.w3.org/2000/svg">
       <symbol id="icon-arrow-select" viewBox="0 0 7 4">
