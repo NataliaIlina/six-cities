@@ -1,7 +1,7 @@
 {
   "name": "six-cities",
   "homepage": "https://nataliailina.github.io/six-cities",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Личный проект «Шесть городов» от HTML Academy",
   "scripts": {
