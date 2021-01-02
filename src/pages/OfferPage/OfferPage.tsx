@@ -8,7 +8,13 @@ import { useDispatch, useSelector } from 'src/hooks';
 
 import { fetchComments, addComment } from 'src/ducks/comments/comments';
 import { setActiveOffer, toggleFavoriteStatus, nearbyOffers } from 'src/ducks/hotels/hotels';
-import { SWrapper, SMap, STitle, SMainTitle } from 'pages/OfferPage/OfferPage.styled';
+import {
+  SWrapper,
+  SMap,
+  STitle,
+  SMainTitle,
+  SBookmarkButton,
+} from 'pages/OfferPage/OfferPage.styled';
 import Rating from 'components/Rating/Rating';
 
 import { EStatus } from 'src/models/common';
@@ -19,7 +25,6 @@ import Price from 'pages/OfferPage/components/Price/Price';
 import Host from 'pages/OfferPage/components/Host/Host';
 import Gallery from 'pages/OfferPage/components/Gallery/Gallery';
 import InsideList from 'pages/OfferPage/components/InsideList/InsideList';
-import BookmarkButton from 'components/BookmarkButton/BookmarkButton';
 import ReviewForm from 'pages/OfferPage/components/ReviewForm/ReviewForm';
 import Reviews from 'pages/OfferPage/components/Reviews/Reviews';
 
@@ -72,11 +77,13 @@ const OfferPage: React.FC = () => {
 
           <SMainTitle>{offer.title}</SMainTitle>
           {isUserAuth ? (
-            <BookmarkButton
+            <SBookmarkButton
               isActive={offer.isFavorite}
               onClick={() => {
                 toggleFavoriteStatusHandler(offer.id, offer.isFavorite ? 0 : 1);
               }}
+              width={31}
+              height={33}
             />
           ) : null}
 

@@ -1,19 +1,20 @@
 import styled from 'styled-components';
+import type { HeightProps, WidthProps } from 'styled-system';
 
-export const SStars = styled.div`
+export const SStars = styled.div<WidthProps & HeightProps>`
   position: relative;
   display: block;
   font-size: 0;
-  width: 147px;
-  height: 24px;
+  width: ${(props) => `${props.width}px`};
+  height: ${(props) => `${props.height}px`};
 
   &::before {
     content: '';
     display: inline-block;
     height: 100%;
     background: url(img/stars.svg) transparent no-repeat center;
-    width: 147px;
-    background-size: 147px 24px;
+    width: ${(props) => `${props.width}px`};
+    background-size: ${(props) => `${props.width}px ${props.height}px`};
   }
 
   & span {
@@ -30,8 +31,8 @@ export const SStars = styled.div`
     display: inline-block;
     height: 100%;
     background: url(img/stars-active.svg) transparent no-repeat center;
-    width: 147px;
-    background-size: 147px 24px;
+    width: ${(props) => `${props.width}px`};
+    background-size: ${(props) => `${props.width}px ${props.height}px`};
   }
 `;
 

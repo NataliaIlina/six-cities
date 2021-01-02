@@ -2,30 +2,24 @@ import React from 'react';
 import { STitle } from 'pages/OfferPage/OfferPage.styled';
 import { BASE_URL } from 'src/constants';
 import { TOffer } from 'src/ducks/hotels/hotelsModels';
+import { SUser, SAvatar, SUserName, SUserStatus, SDescription } from './Host.styled';
 
 const Host: React.FC<{ offer: TOffer }> = ({ offer }) => (
-  <div className="property__host">
+  <div>
     <STitle>Meet the host</STitle>
-    <div className="property__host-user user">
-      <div
-        className={`property__avatar-wrapper ${
-          offer.host.isPro ? 'property__avatar-wrapper--pro' : ''
-        } user__avatar-wrapper`}
-      >
+    <SUser>
+      <SAvatar isPro={offer.host.isPro}>
         <img
-          className="property__avatar user__avatar"
           src={`${BASE_URL}/${offer.host.avatarUrl}`}
           width="74"
           height="74"
           alt="Gallery avatar"
         />
-      </div>
-      <span className="property__user-name">{offer.host.name}</span>
-      {offer.host.isPro ? <span className="property__user-status">Pro</span> : null}
-    </div>
-    <div className="property__description">
-      <p className="property__text">{offer.description}</p>
-    </div>
+      </SAvatar>
+      <SUserName>{offer.host.name}</SUserName>
+      {offer.host.isPro ? <SUserStatus>Pro</SUserStatus> : null}
+    </SUser>
+    <SDescription>{offer.description}</SDescription>
   </div>
 );
 

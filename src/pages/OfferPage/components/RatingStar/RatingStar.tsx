@@ -1,36 +1,20 @@
 import React from 'react';
+import { SIcon, SLabel, SInput } from './RatingStar.styled';
 
-interface RatingStarProps {
+type TProps = {
   value: number;
   title: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  isActive: boolean;
-}
+};
 
-const RatingStar: React.FC<RatingStarProps> = ({ value, title, onChange, isActive }) => (
+const RatingStar: React.FC<TProps> = ({ value, title, onChange }) => (
   <>
-    <input
-      className="form__rating-input visually-hidden"
-      name="rating"
-      value={value}
-      id={`${value}-stars`}
-      type="radio"
-      onChange={onChange}
-    />
-    <label
-      htmlFor={`${value}-stars`}
-      className="reviews__rating-label form__rating-label"
-      title={title}
-    >
-      <svg
-        className="form__star-image"
-        width="37"
-        height="33"
-        style={{ fill: isActive ? '#FF9000' : '#c7c7c7' }}
-      >
+    <SInput name="rating" value={value} id={`${value}-stars`} type="radio" onChange={onChange} />
+    <SLabel htmlFor={`${value}-stars`} title={title}>
+      <SIcon width="37" height="33">
         <use xlinkHref="#icon-star" />
-      </svg>
-    </label>
+      </SIcon>
+    </SLabel>
   </>
 );
 
