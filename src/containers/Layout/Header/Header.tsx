@@ -2,7 +2,7 @@ import React from 'react';
 import BaseLink from 'components/BaseLink/BaseLink';
 import { TUser } from 'src/ducks/auth/authModels';
 import { BASE_URL } from 'src/constants';
-import { SHeader, SUserBlock, SProfileLink, SAvatar } from 'components/Header/Header.styled';
+import { SHeader, SUserBlock, SProfileLink, SAvatar } from 'containers/Layout/Header/Header.styled';
 
 type TProps = {
   userData: TUser | null;
