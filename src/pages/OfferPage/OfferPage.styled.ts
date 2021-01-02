@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { space } from 'styled-system';
 import type { SpaceProps } from 'styled-system';
+import BookmarkButton from 'components/BookmarkButton/BookmarkButton';
 
 export const SWrapper = styled.div`
   display: flex;
@@ -9,6 +10,7 @@ export const SWrapper = styled.div`
   max-width: 613px;
   margin-right: auto;
   margin-left: auto;
+  position: relative;
 `;
 
 export const SMap = styled.div`
@@ -41,4 +43,10 @@ export const STitle = styled.h3<SpaceProps>`
   color: #000;
 
   ${space}
+`;
+
+export const SBookmarkButton = styled(BookmarkButton)`
+  position: absolute;
+  top: 20px;
+  right: -80px;
 `;
