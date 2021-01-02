@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { RATINGS, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH } from 'src/constants';
-import { RatingStar } from 'src/components';
+import RatingStar from 'pages/OfferPage/components/RatingStar/RatingStar';
 
 interface ReviewFormProps {
   addComment: (id: number, rating: number, review: string) => void;

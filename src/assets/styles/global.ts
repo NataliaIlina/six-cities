@@ -18,9 +18,8 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
-    line-height: 1.15;
+    line-height: 1.2;
     color: #383838;
-    background-color: #f5f5f5;
     box-sizing: border-box;
   };
 

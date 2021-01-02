@@ -4,7 +4,4 @@ export { default as Footer } from './Footer/Footer';
 export { default as Header } from './Header/Header';
 export { default as PlaceCard } from './PlaceCard/PlaceCard';
 export { default as SvgSprite } from './SvgSprite/SvgSprite';
-export { default as Reviews } from './Reviews/Reviews';
-export { default as ReviewForm } from './ReviewForm/ReviewForm';
-export { default as RatingStar } from './RatingStar/RatingStar';
 export { default as Link } from './BaseLink/BaseLink';
