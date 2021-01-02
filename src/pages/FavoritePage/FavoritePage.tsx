@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Footer, FavoriteCard, FavoritesEmpty } from 'src/components';
+import FavoriteCard from 'pages/FavoritePage/components/FavoriteCard/FavoriteCard';
+import FavoritesEmpty from 'pages/FavoritePage/components/FavoritesEmpty/FavoritesEmpty';
 import { Layout } from 'src/containers';
 import { useDispatch, useSelector } from 'src/store';
 import { fetchFavorite } from 'src/ducks/hotels/hotels';

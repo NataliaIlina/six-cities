@@ -19,7 +19,8 @@ export const transformKeysToCamel = (o: any) => {
     });
 
     return n;
-  } else if (Array.isArray(o)) {
+  }
+  if (Array.isArray(o)) {
     return o.map((i) => {
       return transformKeysToCamel(i);
     });
@@ -32,7 +33,8 @@ export const transformOffersForFavorite = (offers: TOffer[]) => {
   const cities = new Set<string>();
   offers.forEach((offer) => cities.add(offer.city.name));
   const favorites = {};
-  for (let item of cities.keys()) {
+
+  for (const item of cities.keys()) {
     favorites[item] = offers.filter((o) => o.city.name === item);
   }
   return favorites;
@@ -44,7 +46,6 @@ export const getCitiesFromOffers = (offers: TOffer[]) => {
     if (!cities.some((city) => city.name === offer.city.name)) {
       cities.push(offer.city);
     }
-    return;
   });
   return cities;
 };

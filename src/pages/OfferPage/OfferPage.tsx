@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
-import { PlaceCard } from 'src/components';
+import PlaceCard from 'components/PlaceCard/PlaceCard';
 
 import { Layout, Map } from 'src/containers';
 import { BASE_URL } from 'src/constants';
@@ -68,11 +68,7 @@ const OfferPage: React.FC = () => {
         <Gallery images={offer.images} />
 
         <SWrapper>
-          {offer.isPremium ? (
-            <LocationLink isActive>
-              <span>Premium</span>
-            </LocationLink>
-          ) : null}
+          {offer.isPremium ? <LocationLink isActive>Premium</LocationLink> : null}
 
           <SMainTitle>{offer.title}</SMainTitle>
           {isUserAuth ? (
